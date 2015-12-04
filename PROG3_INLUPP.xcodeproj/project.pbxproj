@@ -33,6 +33,7 @@
 		5D1769E91C11B3DD007A6533 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		5D1769EA1C11B3DD007A6533 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
 		5D1769EB1C11B3DD007A6533 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		5D1769F01C11B6EE007A6533 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 		5D1769D51C11AFF0007A6533 = {
 			isa = PBXGroup;
 			children = (
+				5D1769F01C11B6EE007A6533 /* .gitignore */,
 				5D1769E81C11B3DD007A6533 /* SDL2_image.framework */,
 				5D1769E91C11B3DD007A6533 /* SDL2_mixer.framework */,
 				5D1769EA1C11B3DD007A6533 /* SDL2_ttf.framework */,
