@@ -6,12 +6,23 @@
 //  Copyright © 2015 Viktor Plane. All rights reserved.
 //
 
+#include "GameEngine.hpp"
+
+#include <stdexcept>
 #include <iostream>
 #include <SDL2/SDL.h>
 
+using namespace std;
+
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!!!\n";
-    std::cout << "hiii";
+    try {
+        GameEngine* ge = new GameEngine("Best Game Ever", 200, 200, 500, 600);
+        
+        ge->run();
+        
+        delete(ge);
+    } catch (runtime_error& e) {
+        cerr << e.what() << endl;
+    }
     return 0;
 }
