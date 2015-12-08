@@ -7,6 +7,9 @@
 #include <SDL2_ttf/SDL_ttf.h>
 
 
+#include <iostream>
+
+
 namespace game {
 
     GameEngine::GameEngine(std::string title, int x, int y, int w, int h) {
@@ -17,19 +20,22 @@ namespace game {
         ren = SDL_CreateRenderer(win, -1, 0);
     
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
-        SDL_Rect hela { x,y,w,h };
-        SDL_RenderFillRect(ren, &hela);
+        /*SDL_Rect hela { x,y,w,h };
+        SDL_RenderFillRect(ren, &hela);*/
     }
     
 
     void GameEngine::add(Sprite *sprite) {
+        std::cout << "La till en sprite" << std::endl;
         sprites.push_back(sprite);
     }
     
     void GameEngine::run() {
         SDL_RenderClear(ren);
-        for (Sprite* s : sprites)
+        for (Sprite* s : sprites) {
+            std::cout << "Målade en sprite" << std::endl;
             s->draw();
+        }
         SDL_RenderPresent(ren);
     
         bool goOn = true;
@@ -42,8 +48,10 @@ namespace game {
             } // inre while
         
             SDL_RenderClear(ren);
-            for (Sprite* s : sprites)
+            for (Sprite* s : sprites) {
+                //std::cout << "Målade en sprite en gång till" << std::endl;
                 s->draw();
+            }
             SDL_RenderPresent(ren);
         } // yttre while
     } // run

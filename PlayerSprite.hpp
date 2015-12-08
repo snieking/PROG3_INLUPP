@@ -26,11 +26,10 @@ namespace game {
         ~PlayerSprite();
     protected:
         PlayerSprite(GameEngine* ge, int x, int y, int w, int h);
-        GameEngine* win;
     private:
         PlayerSprite(const PlayerSprite&) = delete;
         const PlayerSprite& operator=(const PlayerSprite&) = delete;
-        SDL_Texture* ture;
+        SDL_Texture* ture, *paddleIcon;
     };
 }
 
