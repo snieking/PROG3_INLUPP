@@ -7,11 +7,16 @@
 //
 
 #include "Sprite.hpp"
+#include "GameEngine.hpp"
 
-Sprite::Sprite(GameEngine* ge, int x, int y, int w, int h) :win(ge) {
+namespace game {
+
+    Sprite::Sprite(GameEngine* ge, int x, int y, int w, int h) :win(ge), rect { x,y,w,h } {
     ge->add(this);
 }
 
 Sprite::~Sprite() {
+    
+}
     
 }

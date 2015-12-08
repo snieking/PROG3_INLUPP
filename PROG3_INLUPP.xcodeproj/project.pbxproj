@@ -14,7 +14,7 @@
 		5D82BF181C11BB3300754B44 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D82BF141C11BB3300754B44 /* SDL2.framework */; };
 		5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF191C11C02800754B44 /* GameEngine.cpp */; };
 		5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1C1C11C08000754B44 /* Sprite.cpp */; };
-		5D82BF211C11C0D500754B44 /* MovingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* MovingSprite.cpp */; };
+		5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,8 +41,8 @@
 		5D82BF1A1C11C02800754B44 /* GameEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameEngine.hpp; sourceTree = "<group>"; };
 		5D82BF1C1C11C08000754B44 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		5D82BF1D1C11C08000754B44 /* Sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
-		5D82BF1F1C11C0D500754B44 /* MovingSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MovingSprite.cpp; path = ../MovingSprite.cpp; sourceTree = "<group>"; };
-		5D82BF201C11C0D500754B44 /* MovingSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MovingSprite.hpp; path = ../MovingSprite.hpp; sourceTree = "<group>"; };
+		5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerSprite.cpp; path = ../PlayerSprite.cpp; sourceTree = "<group>"; };
+		5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PlayerSprite.hpp; path = ../PlayerSprite.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,8 +89,8 @@
 				5D82BF1A1C11C02800754B44 /* GameEngine.hpp */,
 				5D82BF1C1C11C08000754B44 /* Sprite.cpp */,
 				5D82BF1D1C11C08000754B44 /* Sprite.hpp */,
-				5D82BF1F1C11C0D500754B44 /* MovingSprite.cpp */,
-				5D82BF201C11C0D500754B44 /* MovingSprite.hpp */,
+				5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */,
+				5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */,
 			);
 			path = PROG3_INLUPP;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5D82BF211C11C0D500754B44 /* MovingSprite.cpp in Sources */,
+				5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */,
 				5D1769E21C11AFF0007A6533 /* main.cpp in Sources */,
 				5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */,
 				5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */,

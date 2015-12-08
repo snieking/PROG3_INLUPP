@@ -2,21 +2,24 @@
 #define Sprite_hpp
 
 #include <SDL2/SDL.h>
-#include <stdio.h>
 
-class GameEngine;
+namespace game {
 
-class Sprite {
-public:
-    virtual void draw() = 0;
-    virtual ~Sprite();
-protected:
-    Sprite(GameEngine* ge, int x, int y, int w, int h);
-    GameEngine* win;
-private:
-    Sprite(const Sprite&) = delete;
-    const Sprite& operator=(const Sprite&) = delete;
+    class GameEngine;
+
+    class Sprite {
+    public:
+        virtual void draw() = 0;
+        virtual ~Sprite();
+    protected:
+        Sprite(GameEngine* ge, int x, int y, int w, int h);
+        GameEngine* win;
+        SDL_Rect rect;
+    private:
+        Sprite(const Sprite&) = delete;
+        const Sprite& operator=(const Sprite&) = delete;
+    };
     
-};
+}
 
 #endif /* Sprite_hpp */

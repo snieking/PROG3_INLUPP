@@ -9,10 +9,13 @@
 #ifndef GameEngine_hpp
 #define GameEngine_hpp
 
-#include <stdio.h>
 #include <string>
 #include <SDL2/SDL.h>
 #include <vector>
+
+#define FPS_DELAY 500
+
+namespace game {
 
 class Sprite;
 
@@ -21,6 +24,7 @@ public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
     SDL_Renderer* getRen() const; // borde vara privat egentligen
+    GameEngine();
     void run();
     ~GameEngine();
 private:
@@ -29,6 +33,11 @@ private:
     SDL_Renderer* ren;
     std::vector<Sprite*> sprites;
     
+    void clean();
+    
+    SDL_Texture* ture;
 };
+    
+}
 
 #endif /* GameEngine_hpp */
