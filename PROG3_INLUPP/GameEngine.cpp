@@ -16,9 +16,9 @@ namespace game {
         // Ceating renderer
         ren = SDL_CreateRenderer(win, -1, 0);
     
-        SDL_SetRenderDrawColor(ren, 0, 0, 0, 0); // ta bort?
-        /*SDL_Rect hela { x,y,w,h };
-        SDL_RenderFillRect(ren, &hela);*/
+        SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
+        SDL_Rect hela { x,y,w,h };
+        SDL_RenderFillRect(ren, &hela);
     }
     
 

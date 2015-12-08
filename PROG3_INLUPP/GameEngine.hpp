@@ -12,6 +12,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <vector>
+#include "Sprite.hpp"
 
 #define FPS_DELAY 500
 
@@ -24,7 +25,6 @@ public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
     SDL_Renderer* getRen() const; // borde vara privat egentligen
-    GameEngine();
     void run();
     ~GameEngine();
 private:
@@ -33,9 +33,9 @@ private:
     SDL_Renderer* ren;
     std::vector<Sprite*> sprites;
     
-    void clean();
+    //void clean();
     
-    SDL_Texture* ture;
+    //SDL_Texture* ture;
 };
     
 }

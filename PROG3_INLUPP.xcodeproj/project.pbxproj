@@ -15,6 +15,7 @@
 		5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF191C11C02800754B44 /* GameEngine.cpp */; };
 		5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1C1C11C08000754B44 /* Sprite.cpp */; };
 		5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */; };
+		5DA492131C17886D00C828CA /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DA492111C17886D00C828CA /* Board.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,8 @@
 		5D82BF1D1C11C08000754B44 /* Sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
 		5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerSprite.cpp; path = ../PlayerSprite.cpp; sourceTree = "<group>"; };
 		5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PlayerSprite.hpp; path = ../PlayerSprite.hpp; sourceTree = "<group>"; };
+		5DA492111C17886D00C828CA /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
+		5DA492121C17886D00C828CA /* Board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				5D82BF1D1C11C08000754B44 /* Sprite.hpp */,
 				5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */,
 				5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */,
+				5DA492111C17886D00C828CA /* Board.cpp */,
+				5DA492121C17886D00C828CA /* Board.hpp */,
 			);
 			path = PROG3_INLUPP;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 				5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */,
 				5D1769E21C11AFF0007A6533 /* main.cpp in Sources */,
 				5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */,
+				5DA492131C17886D00C828CA /* Board.cpp in Sources */,
 				5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

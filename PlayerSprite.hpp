@@ -13,11 +13,9 @@
 
 #include <stdio.h>
 #include "Sprite.hpp"
-#include "GameEngine.hpp"
+
 
 namespace game {
-    
-    class GameEngine;
     
     class PlayerSprite : public Sprite {
     public:

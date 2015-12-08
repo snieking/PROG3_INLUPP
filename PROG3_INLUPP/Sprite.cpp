@@ -12,11 +12,11 @@
 namespace game {
 
     Sprite::Sprite(GameEngine* ge, int x, int y, int w, int h) :win(ge), rect { x,y,w,h } {
-    ge->add(this);
-}
+        ge->add(this);
+    }
 
-Sprite::~Sprite() {
+    Sprite::~Sprite() {
     
-}
+    }
     
 }

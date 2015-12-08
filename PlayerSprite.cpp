@@ -21,7 +21,7 @@ namespace game {
     
     PlayerSprite::PlayerSprite(GameEngine* ge, int x, int y, int w, int h) : Sprite(ge, x, y, w, h) {
         
-        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Documents/git/PROG3_INLUPP/paddle.png");
+        SDL_Surface* surf = IMG_Load("paddle.png");
         ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
         SDL_FreeSurface(surf);
         

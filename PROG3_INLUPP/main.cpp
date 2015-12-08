@@ -20,6 +20,7 @@ int main(int argc, const char * argv[]) {
         
         delete ge;
         delete s1;
+        
     } catch (runtime_error& e) {
         cerr << e.what() << endl;
     }
