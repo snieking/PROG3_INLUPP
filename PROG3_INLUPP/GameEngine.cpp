@@ -1,5 +1,6 @@
 #include "GameEngine.hpp"
 #include "Sprite.hpp"
+#include "PlayerSprite.hpp"
 
 #include <string>
 #include <SDL2/SDL.h>
@@ -26,14 +27,21 @@ namespace game {
     
 
     void GameEngine::add(Sprite *sprite) {
-        std::cout << "La till en sprite" << std::endl;
+        //std::cout << "La till en sprite" << std::endl;
         sprites.push_back(sprite);
     }
     
+    void GameEngine::setPaddle(PlayerSprite *thePaddle) {
+        paddle = thePaddle;
+    }
+    
     void GameEngine::run() {
+        // Removes mouse
+        SDL_SetRelativeMouseMode(SDL_TRUE);
+        int x = 0;
         SDL_RenderClear(ren);
         for (Sprite* s : sprites) {
-            std::cout << "Målade en sprite" << std::endl;
+            //std::cout << "Målade en sprite" << std::endl;
             s->draw();
         }
         SDL_RenderPresent(ren);
@@ -44,6 +52,10 @@ namespace game {
             while (SDL_PollEvent(&eve)) {
                 switch (eve.type) {
                     case SDL_QUIT: goOn = false; break;
+                    case SDL_MOUSEMOTION:
+                        x = eve.motion.xrel;
+                        paddle->move(x);
+                        break;
                 } // switch
             } // inre while
         

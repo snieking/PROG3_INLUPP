@@ -33,6 +33,10 @@ namespace game {
         SDL_FreeSurface(surf);
         
     }
+    
+    void PlayerSprite::move(int xPos) {
+        rect.x += xPos;
+    }
 
     void PlayerSprite::draw() {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);

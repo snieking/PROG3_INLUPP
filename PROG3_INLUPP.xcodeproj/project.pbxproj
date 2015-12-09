@@ -16,6 +16,7 @@
 		5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1C1C11C08000754B44 /* Sprite.cpp */; };
 		5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */; };
 		5DA492131C17886D00C828CA /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DA492111C17886D00C828CA /* Board.cpp */; };
+		5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC39AA41C18BAEF00098BFD /* Ball.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,7 +32,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5D1769DE1C11AFF0007A6533 /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = PROG3_INLUPP; path = /Users/viktorplane/Documents/git/PROG3_INLUPP/build/Debug/PROG3_INLUPP; sourceTree = "<absolute>"; };
 		5D1769E11C11AFF0007A6533 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5D1769F01C11B6EE007A6533 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5D6346A01C17957A006596EB /* paddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paddle.png; sourceTree = "<group>"; };
@@ -47,6 +47,9 @@
 		5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PlayerSprite.hpp; path = ../PlayerSprite.hpp; sourceTree = "<group>"; };
 		5DA492111C17886D00C828CA /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		5DA492121C17886D00C828CA /* Board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
+		5DC39AA31C18236A00098BFD /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PROG3_INLUPP; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC39AA41C18BAEF00098BFD /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
+		5DC39AA51C18BAEF00098BFD /* Ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,15 +76,17 @@
 				5D82BF141C11BB3300754B44 /* SDL2.framework */,
 				5D1769F01C11B6EE007A6533 /* .gitignore */,
 				5D1769E01C11AFF0007A6533 /* PROG3_INLUPP */,
+				5DC39AA31C18236A00098BFD /* PROG3_INLUPP */,
 			);
 			sourceTree = "<group>";
 		};
 		5D1769E01C11AFF0007A6533 /* PROG3_INLUPP */ = {
 			isa = PBXGroup;
 			children = (
+				5DC39AA41C18BAEF00098BFD /* Ball.cpp */,
+				5DC39AA51C18BAEF00098BFD /* Ball.hpp */,
 				5D1769E11C11AFF0007A6533 /* main.cpp */,
 				5D82BF191C11C02800754B44 /* GameEngine.cpp */,
-				5D6346A11C1796B2006596EB /* Supporting Files */,
 				5D82BF1A1C11C02800754B44 /* GameEngine.hpp */,
 				5D82BF1C1C11C08000754B44 /* Sprite.cpp */,
 				5D82BF1D1C11C08000754B44 /* Sprite.hpp */,
@@ -89,6 +94,7 @@
 				5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */,
 				5DA492111C17886D00C828CA /* Board.cpp */,
 				5DA492121C17886D00C828CA /* Board.hpp */,
+				5D6346A11C1796B2006596EB /* Supporting Files */,
 			);
 			path = PROG3_INLUPP;
 			sourceTree = "<group>";
@@ -118,7 +124,7 @@
 			);
 			name = PROG3_INLUPP;
 			productName = PROG3_INLUPP;
-			productReference = 5D1769DE1C11AFF0007A6533 /* PROG3_INLUPP */;
+			productReference = 5DC39AA31C18236A00098BFD /* PROG3_INLUPP */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -157,6 +163,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */,
 				5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */,
 				5D1769E21C11AFF0007A6533 /* main.cpp in Sources */,
 				5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */,

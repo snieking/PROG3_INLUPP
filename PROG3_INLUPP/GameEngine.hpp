@@ -13,6 +13,7 @@
 #include <SDL2/SDL.h>
 #include <vector>
 #include "Sprite.hpp"
+#include "PlayerSprite.hpp"
 
 #define FPS_DELAY 500
 
@@ -26,12 +27,14 @@ public:
     void add(Sprite* sprite);
     SDL_Renderer* getRen() const; // borde vara privat egentligen
     void run();
+    void setPaddle(PlayerSprite* paddle);
     ~GameEngine();
 private:
     friend class Sprite;
     SDL_Window* win;
     SDL_Renderer* ren;
     std::vector<Sprite*> sprites;
+    PlayerSprite* paddle;
     
     //void clean();
     

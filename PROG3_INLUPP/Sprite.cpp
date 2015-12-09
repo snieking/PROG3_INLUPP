@@ -14,6 +14,11 @@ namespace game {
     Sprite::Sprite(GameEngine* ge, int x, int y, int w, int h) :win(ge), rect { x,y,w,h } {
         ge->add(this);
     }
+    
+    /*
+    int Sprite::getX() {
+        return rect.x;
+    }*/
 
     Sprite::~Sprite() {
     

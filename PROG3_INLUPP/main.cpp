@@ -15,6 +15,8 @@ int main(int argc, const char * argv[]) {
         GameEngine* ge = new GameEngine("Best game eva", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
         
         Sprite* s1 = PlayerSprite::getInstance(ge, 350, 569, 100, 30);
+
+        ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
         
         ge->run();
         
