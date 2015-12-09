@@ -20,7 +20,7 @@ namespace game {
     class PlayerSprite : public Sprite {
     public:
         void draw();
-        void mouseLeft(const SDL_Event&);
+        void moveLeft(const SDL_Event&);
         void mouseRight(const SDL_Event&);
         static PlayerSprite* getInstance(GameEngine* ge, int x, int y, int w, int h);
         ~PlayerSprite();
