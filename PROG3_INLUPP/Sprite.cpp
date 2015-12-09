@@ -15,10 +15,14 @@ namespace game {
         ge->add(this);
     }
     
-    /*
+    
     int Sprite::getX() {
         return rect.x;
-    }*/
+    }
+    
+    int Sprite::getY() {
+        return rect.y;
+    }
 
     Sprite::~Sprite() {
     

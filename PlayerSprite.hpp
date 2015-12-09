@@ -18,7 +18,7 @@ namespace game {
     class PlayerSprite : public Sprite {
     public:
         void draw();
-        void move(int xPos);
+        void move(int xPos, int yPos);
         static PlayerSprite* getInstance(GameEngine* ge, int x, int y, int w, int h);
         ~PlayerSprite();
     protected:

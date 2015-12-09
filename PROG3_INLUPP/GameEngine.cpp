@@ -35,17 +35,21 @@ namespace game {
         paddle = thePaddle;
     }
     
+    void GameEngine::setBall(Ball *theBall) {
+        ball = theBall;
+    }
+    
     void GameEngine::run() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
         int x = 0;
+        int ballY = 1, ballX = 0;
         SDL_RenderClear(ren);
-        for (Sprite* s : sprites) {
-            //std::cout << "Målade en sprite" << std::endl;
+        for (Sprite* s : sprites)
             s->draw();
-        }
+        
         SDL_RenderPresent(ren);
-    
+        bool released = false;
         bool goOn = true;
         while (goOn) {
             SDL_Event eve;
@@ -54,16 +58,38 @@ namespace game {
                     case SDL_QUIT: goOn = false; break;
                     case SDL_MOUSEMOTION:
                         x = eve.motion.xrel;
-                        paddle->move(x);
+                        paddle->move(x,0);
+                        if(!ball->released)
+                            ball->move(x, 548);
                         break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        if(!ball->released) {
+                            ball->released = true;
+                            ball->goingUp = true;
+                        }
+                        
                 } // switch
             } // inre while
-        
-            SDL_RenderClear(ren);
-            for (Sprite* s : sprites) {
-                //std::cout << "Målade en sprite en gång till" << std::endl;
-                s->draw();
+            
+            // Ifall bollen träffar taket så går den inte upp längre
+            if(ball->getY() == 0)
+                ball->goingUp = false;
+            
+            // Bollen ändras till goingUp efter att den 'studsat' på paddeln
+            if(ball->getY() == paddle->getY()-20) {
+                if(paddle->getX()-100 <= ball->getX() && ball->getX() < paddle->getX()+100) {
+                    ball->goingUp = true;
+                }
             }
+            
+            // Görs endast efter bollen har skjutits iväg
+            if(ball->released) {
+                ball->move(ballX, ballY);
+            }
+            SDL_RenderClear(ren);
+            for (Sprite* s : sprites)
+                s->draw();
+            
             SDL_RenderPresent(ren);
         } // yttre while
     } // run

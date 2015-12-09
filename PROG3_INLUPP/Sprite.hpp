@@ -10,8 +10,10 @@ namespace game {
     class Sprite {
     public:
         virtual void draw() = 0;
-        virtual void move(int xPos) = 0;
-        //int getX();
+        //virtual void move(int xPos) = 0;
+        virtual void move(int xPos, int yPos) = 0;
+        int getX();
+        int getY();
         //virtual void setPaddle(Sprite* paddle) = 0;
         virtual ~Sprite();
     protected:

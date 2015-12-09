@@ -34,7 +34,7 @@ namespace game {
         
     }
     
-    void PlayerSprite::move(int xPos) {
+    void PlayerSprite::move(int xPos, int yPos) {
         rect.x += xPos;
     }
 

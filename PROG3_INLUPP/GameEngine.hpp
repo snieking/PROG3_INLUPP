@@ -14,6 +14,7 @@
 #include <vector>
 #include "Sprite.hpp"
 #include "PlayerSprite.hpp"
+#include "Ball.hpp"
 
 #define FPS_DELAY 500
 
@@ -28,6 +29,7 @@ public:
     SDL_Renderer* getRen() const; // borde vara privat egentligen
     void run();
     void setPaddle(PlayerSprite* paddle);
+    void setBall(Ball* ball);
     ~GameEngine();
 private:
     friend class Sprite;
@@ -35,6 +37,7 @@ private:
     SDL_Renderer* ren;
     std::vector<Sprite*> sprites;
     PlayerSprite* paddle;
+    Ball* ball;
     
     //void clean();
     

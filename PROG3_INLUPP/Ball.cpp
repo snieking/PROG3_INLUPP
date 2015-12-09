@@ -1,11 +1,3 @@
-//
-//  Ball.cpp
-//  PROG3_INLUPP
-//
-//  Created by Viktor Plane on 09/12/15.
-//  Copyright © 2015 Viktor Plane. All rights reserved.
-//
-
 #include "Ball.hpp"
 #include "Sprite.hpp"
 #include "GameEngine.hpp"
@@ -29,12 +21,23 @@ namespace game {
         
         ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
         SDL_FreeSurface(surf);
+        released = false;
         
     }
     
     void Ball::move(int xPos, int yPos) {
-        rect.x += xPos;
-        rect.y -= yPos;
+        if (!released) {
+            rect.x += xPos;
+            rect.y = yPos;
+        } else {
+            if(!goingUp) {
+                rect.x += xPos;
+                rect.y += yPos;
+            } else {
+                rect.x -= xPos;
+                rect.y -= yPos;
+            }
+        }
     }
     
     void Ball::draw() {

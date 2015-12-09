@@ -11,6 +11,8 @@ namespace game {
         void draw();
         void move(int xPos, int yPos);
         static Ball* getInstance(GameEngine* ge, int x, int y, int w, int h);
+        bool released = false;
+        bool goingUp = false;
         ~Ball();
     protected:
         Ball(GameEngine* ge, int x, int y, int w, int h);
