@@ -71,7 +71,6 @@ namespace game {
                             ball->released = true;
                             ball->goingUp = true;
                         }
-                        
                 } // switch
             } // inre while
             
@@ -81,6 +80,7 @@ namespace game {
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
+            // Ifall bollen träffar en bricka, fungerar bara undersidan av brickan, inte vid sidan
             for(Brick* brick: brickField->getBricks()) {
                 if(ball->getY() == brick->getY()+50) {
                     if(brick->getX()-25 <= ball->getX() && ball->getX() <= brick->getX()+99) {
