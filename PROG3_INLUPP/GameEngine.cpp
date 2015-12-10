@@ -47,11 +47,12 @@ namespace game {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
         int x = 0;
-        int ballY = 1, ballX = 0;
+        int ballY = 1, ballX = 1;
         SDL_RenderClear(ren);
         for (Sprite* s : sprites)
             s->draw();
         
+        ball->goingLeft = true;
         SDL_RenderPresent(ren);
         bool goOn = true;
         while (goOn) {
@@ -80,22 +81,28 @@ namespace game {
             
             for(Brick* brick: brickField->getBricks()) {
                 if(ball->getY() == brick->getY()+50) {
-                    std::cout << "getY() stämmer" << std::endl;
-                    if(brick->getX()-45 <= ball->getX() && ball->getX() <= brick->getX()+45) {
-                        // Kollar så att brickan inte redan är träffad
+                    if(brick->getX()-25 <= ball->getX() && ball->getX() <= brick->getX()+99) {
+                        // Kollar så att brickan inte redan är träffad TODO: Fungerar inge bra
                         if(!brick->hit) {
                             std::cout << "Träffade en brick" << std::endl;
                             ball->goingUp = false;
                             brickField->remove(brick);
                             brick->hit = true;
+                            
                         }
                     }
                 }
             }
             
+            // Kolla ifall bollen har träffat väggen
+            if(ball->getX() == 0)
+                ball->goingLeft = true;
+            if(ball->getX() == 800)
+                ball->goingLeft = false;
+            
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() == paddle->getY()-20) {
-                if(paddle->getX()-100 <= ball->getX() && ball->getX() < paddle->getX()+100) {
+                if(paddle->getX() <= ball->getX() && ball->getX() < paddle->getX()+100) {
                     ball->goingUp = true;
                 }
             }

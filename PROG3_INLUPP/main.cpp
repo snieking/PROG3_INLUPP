@@ -45,6 +45,10 @@ int main(int argc, const char * argv[]) {
         Sprite* b9 = Brick::getInstance(ge, 800, 0, 100, 50, id++);
         brickField->add(dynamic_cast<Brick*>(b9));
         
+        // Andra raden
+        Sprite* b10 = Brick::getInstance(ge, 0, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b10));
+        
         ge->run();
         
         delete ge;

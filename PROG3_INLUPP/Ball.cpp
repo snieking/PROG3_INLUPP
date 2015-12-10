@@ -31,11 +31,21 @@ namespace game {
             rect.y = yPos;
         } else {
             if(!goingUp) {
+                if(goingLeft) {
+                    rect.x -= xPos;
+                    rect.y += yPos;
+                } else {
                 rect.x += xPos;
                 rect.y += yPos;
+                }
             } else {
+                if(goingLeft) {
                 rect.x -= xPos;
                 rect.y -= yPos;
+                } else {
+                    rect.x += xPos;
+                    rect.y -= yPos;
+                }
             }
         }
     }
