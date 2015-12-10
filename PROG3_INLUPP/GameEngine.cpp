@@ -47,7 +47,7 @@ namespace game {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
         int x = 0;
-        int ballY = 1, ballX = 1;
+        int ballY = 1, ballX = 0;
         SDL_RenderClear(ren);
         for (Sprite* s : sprites)
             s->draw();
@@ -73,7 +73,6 @@ namespace game {
                         }
                 } // switch
             } // inre while
-            
             
             
             // Ifall bollen träffar taket så går den inte upp längre
@@ -106,6 +105,13 @@ namespace game {
             if(ball->getY() == paddle->getY()-20) {
                 if(paddle->getX() <= ball->getX() && ball->getX() < paddle->getX()+100) {
                     ball->goingUp = true;
+                    if(paddle->getX() <= ball->getX() && ball->getX() <= paddle->getX()+50)
+                       ball->goingLeft = true;
+                    else
+                        ball->goingLeft = false;
+                       
+                    if(ballX == 0)
+                        ballX = 1;
                 }
             }
             

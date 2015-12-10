@@ -42,12 +42,23 @@ int main(int argc, const char * argv[]) {
         brickField->add(dynamic_cast<Brick*>(b7));
         Sprite* b8 = Brick::getInstance(ge, 700, 0, 100, 50, id++);
         brickField->add(dynamic_cast<Brick*>(b8));
-        Sprite* b9 = Brick::getInstance(ge, 800, 0, 100, 50, id++);
-        brickField->add(dynamic_cast<Brick*>(b9));
+        /*Sprite* b9 = Brick::getInstance(ge, 800, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b9)); */
         
         // Andra raden
         Sprite* b10 = Brick::getInstance(ge, 0, 50, 100, 50, id++);
         brickField->add(dynamic_cast<Brick*>(b10));
+        Sprite* b11 = Brick::getInstance(ge, 100, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b11));
+        Sprite* b12 = Brick::getInstance(ge, 300, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b12));
+        Sprite* b13 = Brick::getInstance(ge, 400, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b13));
+        Sprite* b14 = Brick::getInstance(ge, 600, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b14));
+        Sprite* b15 = Brick::getInstance(ge, 700, 50, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b15));
+
         
         ge->run();
         

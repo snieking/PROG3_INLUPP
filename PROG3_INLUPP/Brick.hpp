@@ -4,6 +4,8 @@
 #include "Sprite.hpp"
 #include <SDL2/SDL.h>
 
+// Ta bort ident
+
 namespace game {
     class Brick : public Sprite {
     public:
