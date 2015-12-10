@@ -15,6 +15,7 @@
 #include "Sprite.hpp"
 #include "PlayerSprite.hpp"
 #include "Ball.hpp"
+#include "BrickField.hpp"
 
 #define FPS_DELAY 500
 
@@ -28,8 +29,9 @@ public:
     void add(Sprite* sprite);
     SDL_Renderer* getRen() const; // borde vara privat egentligen
     void run();
-    void setPaddle(PlayerSprite* paddle);
-    void setBall(Ball* ball);
+    void setPaddle(PlayerSprite* thePaddle);
+    void setBall(Ball* theBall);
+    void setBrickField(BrickField* theBrickField);
     ~GameEngine();
 private:
     friend class Sprite;
@@ -38,6 +40,7 @@ private:
     std::vector<Sprite*> sprites;
     PlayerSprite* paddle;
     Ball* ball;
+    BrickField* brickField;
     
     //void clean();
     

@@ -15,6 +15,8 @@
 		5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF191C11C02800754B44 /* GameEngine.cpp */; };
 		5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1C1C11C08000754B44 /* Sprite.cpp */; };
 		5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */; };
+		5D9A3BC81C19661900550046 /* BrickField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A3BC61C19661900550046 /* BrickField.cpp */; };
+		5D9A3BCB1C1967C900550046 /* Brick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A3BC91C1967C900550046 /* Brick.cpp */; };
 		5DA492131C17886D00C828CA /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DA492111C17886D00C828CA /* Board.cpp */; };
 		5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC39AA41C18BAEF00098BFD /* Ball.cpp */; };
 /* End PBXBuildFile section */
@@ -45,9 +47,13 @@
 		5D82BF1D1C11C08000754B44 /* Sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
 		5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlayerSprite.cpp; path = ../PlayerSprite.cpp; sourceTree = "<group>"; };
 		5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PlayerSprite.hpp; path = ../PlayerSprite.hpp; sourceTree = "<group>"; };
+		5D9A3BC61C19661900550046 /* BrickField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrickField.cpp; sourceTree = "<group>"; };
+		5D9A3BC71C19661900550046 /* BrickField.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BrickField.hpp; sourceTree = "<group>"; };
+		5D9A3BC91C1967C900550046 /* Brick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Brick.cpp; sourceTree = "<group>"; };
+		5D9A3BCA1C1967C900550046 /* Brick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Brick.hpp; sourceTree = "<group>"; };
 		5DA492111C17886D00C828CA /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		5DA492121C17886D00C828CA /* Board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
-		5DC39AA31C18236A00098BFD /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PROG3_INLUPP; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DC39AA31C18236A00098BFD /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = PROG3_INLUPP; path = /Users/viktorplane/Documents/git/PROG3_INLUPP/build/Debug/PROG3_INLUPP; sourceTree = "<absolute>"; };
 		5DC39AA41C18BAEF00098BFD /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		5DC39AA51C18BAEF00098BFD /* Ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -76,7 +82,6 @@
 				5D82BF141C11BB3300754B44 /* SDL2.framework */,
 				5D1769F01C11B6EE007A6533 /* .gitignore */,
 				5D1769E01C11AFF0007A6533 /* PROG3_INLUPP */,
-				5DC39AA31C18236A00098BFD /* PROG3_INLUPP */,
 			);
 			sourceTree = "<group>";
 		};
@@ -85,6 +90,10 @@
 			children = (
 				5DC39AA41C18BAEF00098BFD /* Ball.cpp */,
 				5DC39AA51C18BAEF00098BFD /* Ball.hpp */,
+				5D9A3BC91C1967C900550046 /* Brick.cpp */,
+				5D9A3BCA1C1967C900550046 /* Brick.hpp */,
+				5D9A3BC61C19661900550046 /* BrickField.cpp */,
+				5D9A3BC71C19661900550046 /* BrickField.hpp */,
 				5D1769E11C11AFF0007A6533 /* main.cpp */,
 				5D82BF191C11C02800754B44 /* GameEngine.cpp */,
 				5D82BF1A1C11C02800754B44 /* GameEngine.hpp */,
@@ -165,8 +174,10 @@
 			files = (
 				5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */,
 				5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */,
+				5D9A3BC81C19661900550046 /* BrickField.cpp in Sources */,
 				5D1769E21C11AFF0007A6533 /* main.cpp in Sources */,
 				5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */,
+				5D9A3BCB1C1967C900550046 /* Brick.cpp in Sources */,
 				5DA492131C17886D00C828CA /* Board.cpp in Sources */,
 				5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */,
 			);

@@ -20,6 +20,31 @@ int main(int argc, const char * argv[]) {
         Sprite* s2 = Ball::getInstance(ge, 390, 548, 20, 20);
         ge->setBall(dynamic_cast<Ball*>(s2));
         
+        
+        BrickField* brickField = new BrickField(9);
+        ge->setBrickField(brickField);
+        
+        // Bricks
+        int id = 0;
+        Sprite* b1 = Brick::getInstance(ge, 0, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b1));
+        Sprite* b2 = Brick::getInstance(ge, 100, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b2));
+        Sprite* b3 = Brick::getInstance(ge, 200, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b3));
+        Sprite* b4 = Brick::getInstance(ge, 300, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b4));
+        Sprite* b5 = Brick::getInstance(ge, 400, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b5));
+        Sprite* b6 = Brick::getInstance(ge, 500, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b6));
+        Sprite* b7 = Brick::getInstance(ge, 600, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b7));
+        Sprite* b8 = Brick::getInstance(ge, 700, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b8));
+        Sprite* b9 = Brick::getInstance(ge, 800, 0, 100, 50, id++);
+        brickField->add(dynamic_cast<Brick*>(b9));
+        
         ge->run();
         
         delete ge;

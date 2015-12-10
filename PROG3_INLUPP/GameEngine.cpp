@@ -39,6 +39,10 @@ namespace game {
         ball = theBall;
     }
     
+    void GameEngine::setBrickField(BrickField *theBrickField) {
+        brickField = theBrickField;
+    }
+    
     void GameEngine::run() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -49,7 +53,6 @@ namespace game {
             s->draw();
         
         SDL_RenderPresent(ren);
-        bool released = false;
         bool goOn = true;
         while (goOn) {
             SDL_Event eve;
@@ -74,6 +77,21 @@ namespace game {
             // Ifall bollen träffar taket så går den inte upp längre
             if(ball->getY() == 0)
                 ball->goingUp = false;
+            
+            for(Brick* brick: brickField->getBricks()) {
+                if(ball->getY() == brick->getY()+50) {
+                    std::cout << "getY() stämmer" << std::endl;
+                    if(brick->getX()-45 <= ball->getX() && ball->getX() <= brick->getX()+45) {
+                        // Kollar så att brickan inte redan är träffad
+                        if(!brick->hit) {
+                            std::cout << "Träffade en brick" << std::endl;
+                            ball->goingUp = false;
+                            brickField->remove(brick);
+                            brick->hit = true;
+                        }
+                    }
+                }
+            }
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() == paddle->getY()-20) {
