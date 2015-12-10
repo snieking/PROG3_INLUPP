@@ -75,6 +75,8 @@ namespace game {
                 } // switch
             } // inre while
             
+            
+            
             // Ifall bollen träffar taket så går den inte upp längre
             if(ball->getY() == 0)
                 ball->goingUp = false;
@@ -94,11 +96,11 @@ namespace game {
                 }
             }
             
-            // Kolla ifall bollen har träffat väggen
+            // Kolla ifall bollen har träffat en vägg
             if(ball->getX() == 0)
-                ball->goingLeft = true;
-            if(ball->getX() == 800)
                 ball->goingLeft = false;
+            if(ball->getX() == 800)
+                ball->goingLeft = true;
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() == paddle->getY()-20) {
