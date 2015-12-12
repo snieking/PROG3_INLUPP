@@ -6,23 +6,30 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
+#include <SDL2_ttf/SDL_ttf.h>
 
 
 #include <iostream>
 
-
 namespace game {
 
     GameEngine::GameEngine(std::string title, int x, int y, int w, int h) {
+        WIDTH = w;
+        HEIGHT = h;
         // Creating the window where we will draw
+        
         win = SDL_CreateWindow(title.c_str(), x, y, w, h, 0);
         
         // Ceating renderer
         ren = SDL_CreateRenderer(win, -1, 0);
     
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
-        /*SDL_Rect hela { x,y,w,h };
-        SDL_RenderFillRect(ren, &hela);*/
+        
+        TTF_Init();
+        
+        f = TTF_OpenFont("/Library/Fonts/Futura.ttc", 100);
+        textColor = {255, 255, 255};
+        
     }
     
 
@@ -46,16 +53,20 @@ namespace game {
     void GameEngine::run() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
+        
+        int totalPoints = 0;
         int x = 0;
         int ballY = 1, ballX = 0;
         SDL_RenderClear(ren);
         for (Sprite* s : sprites)
             s->draw();
         
+
         ball->goingLeft = true;
         SDL_RenderPresent(ren);
         bool goOn = true;
         while (goOn) {
+            Uint32 start = SDL_GetTicks() + FPS;
             SDL_Event eve;
             while (SDL_PollEvent(&eve)) {
                 switch (eve.type) {
@@ -64,7 +75,7 @@ namespace game {
                         x = eve.motion.xrel;
                         paddle->move(x,0);
                         if(!ball->released)
-                            ball->move(x, 548);
+                            ball->move(x, paddle->getY()-ball->getHeight());
                         break;
                     case SDL_MOUSEBUTTONDOWN:
                         if(!ball->released) {
@@ -79,39 +90,70 @@ namespace game {
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
-            // Ifall bollen träffar en bricka, fungerar bara undersidan av brickan, inte vid sidan
+
             for(Brick* brick: brickField->getBricks()) {
-                if(ball->getY() == brick->getY()+50) {
-                    if(brick->getX()-25 <= ball->getX() && ball->getX() <= brick->getX()+99) {
-                        // Kollar så att brickan inte redan är träffad TODO: Fungerar inge bra
-                        if(!brick->hit) {
-                            std::cout << "Träffade en brick" << std::endl;
-                            ball->goingUp = false;
-                            brickField->remove(brick);
-                            brick->hit = true;
-                            
+                if(!brick->hit) 
+                    if(brick->intersectsWith(ball)) {
+                        brick->hit = true;
+                        totalPoints += brick->points;
+                        std::cout << "Tog just bort en" << std::endl;
+                        if((brick->getX() + brick->getWidth() == ball->getX())) {
+                            std::cout << "Högerkanten" << std::endl;
+                            ball->goingLeft = false;
                         }
+                        
+                        else if(brick->getX() == ball->getX() + ball->getWidth()) {
+                            ball->goingLeft = true;
+                            std::cout << "Vänsterkanten" << std::endl;
+                        }
+                        
+                        else if(brick->getY() + brick->getHeight() == ball->getY()) {
+                            ball->goingUp = false;
+                            std::cout << "Underkanten" << std::endl;
+                        }
+                        
+                        else if((brick->getY() == ball->getY() + ball->getHeight())) {
+                            ball->goingUp = true;
+                            std::cout << "Överkanten" << std::endl;
+                        }
+                                
+                                
+                        
                     }
-                }
+                    
             }
-            
+                       
             // Kolla ifall bollen har träffat en vägg
-            if(ball->getX() == 0)
+            if(ball->getX() <= 0)
                 ball->goingLeft = false;
-            if(ball->getX() == 800)
+            if(ball->getX()+ball->getWidth() >= 800)
                 ball->goingLeft = true;
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
-            if(ball->getY() == paddle->getY()-20) {
-                if(paddle->getX() <= ball->getX() && ball->getX() < paddle->getX()+100) {
+            if(ball->getY() > paddle->getY()-10 && paddle->getY()+10 > ball->getY()) {
+                // -10 så att den träffar på vänstersida
+                if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() < paddle->getX()+paddle->getWidth()+ball->getWidth()) {
                     ball->goingUp = true;
-                    if(paddle->getX() <= ball->getX() && ball->getX() <= paddle->getX()+50)
+                    if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() <= paddle->getX()+ball->getWidth()) {
+                        ball->goingLeft = true;
+                        ballX = 2;
+                    }
+                        
+                    else if(paddle->getX()+ball->getWidth() <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)) {
                        ball->goingLeft = true;
-                    else
-                        ball->goingLeft = false;
-                       
-                    if(ballX == 0)
                         ballX = 1;
+                    }
+                    else if(paddle->getX()+(paddle->getWidth()/2) <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)+ball->getWidth()) {
+                        ball->goingLeft = false;
+                        ballX = 1;
+                    }
+                    else {
+                        ball->goingLeft = false;
+                        ballX = 2;
+                    }
+                    
+                    //if(ballX == 1)
+                        //ballX = 1;
                 }
             }
             
@@ -123,10 +165,29 @@ namespace game {
             for (Sprite* s : sprites)
                 s->draw();
             
+            std::string printpoints = "Score: " + std::to_string(totalPoints);
+            
+            SDL_Surface* rubrSurf = TTF_RenderText_Solid(f, printpoints.c_str(), textColor);
+            
+            rubrText = SDL_CreateTextureFromSurface(ren, rubrSurf);
+            
+            
+            rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 25 };
+            SDL_FreeSurface(rubrSurf);
+            
+            
+            SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
+            
             SDL_RenderPresent(ren);
+            
+            //std::cout << SDL_TICKS_PASSED(SDL_GetTicks(), start) << std::endl;
+            
+            if(!SDL_TICKS_PASSED(SDL_GetTicks(), start))
+                SDL_Delay(start - SDL_GetTicks());
+            
         } // yttre while
     } // run
-     
+    
 
     SDL_Renderer* GameEngine::getRen() const {
         return ren;

@@ -29,11 +29,6 @@ namespace game {
         bricks.push_back(brick);
     }
     
-    void BrickField::remove(Brick* brick) { /*
-        bricks.erase(bricks.begin(), bricks.begin()+brick->getId());
-        */
-    }
-    
     BrickField::~BrickField() {
         
     }

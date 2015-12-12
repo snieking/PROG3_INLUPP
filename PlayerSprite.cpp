@@ -24,8 +24,10 @@ namespace game {
     }
     
     PlayerSprite::PlayerSprite(GameEngine* ge, int x, int y, int w, int h) : Sprite(ge, x, y, w, h) {
+        pWidth = w;
+        pHeight = h;
         
-        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Documents/git/PROG3_INLUPP/paddle.png");
+        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/greenpaddle.png");
         if(surf == NULL)
             std::cout << "Unable to load image" << std::endl;
       
@@ -40,6 +42,14 @@ namespace game {
 
     void PlayerSprite::draw() {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
+    }
+    
+    int PlayerSprite::getWidth() {
+        return pWidth;
+    }
+    
+    int PlayerSprite::getHeight() {
+        return pHeight;
     }
     
     PlayerSprite::~PlayerSprite() {

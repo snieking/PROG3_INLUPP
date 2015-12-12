@@ -20,6 +20,10 @@ namespace game {
         return rect.x;
     }
     
+    void Sprite::setX(int newX) {
+        rect.x = newX;
+    }
+    
     int Sprite::getY() {
         return rect.y;
     }

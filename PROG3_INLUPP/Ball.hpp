@@ -14,10 +14,13 @@ namespace game {
         bool released = false;
         bool goingUp = false;
         bool goingLeft = false;
+        int getHeight(), getWidth();
+        //void intersectsWith(Brick* brick);
         ~Ball();
     protected:
         Ball(GameEngine* ge, int x, int y, int w, int h);
     private:
+        int bWidth, bHeight;
         Ball(const Ball&) = delete;
         const Ball& operator=(const Ball&) = delete;
         SDL_Texture* ture;

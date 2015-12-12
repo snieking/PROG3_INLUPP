@@ -16,8 +16,8 @@
 #include "PlayerSprite.hpp"
 #include "Ball.hpp"
 #include "BrickField.hpp"
+#include "SDL2_ttf/SDL_ttf.h"
 
-#define FPS_DELAY 500
 
 namespace game {
 
@@ -41,6 +41,12 @@ private:
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
+    const int FPS = 5;
+    int WIDTH, HEIGHT;
+    SDL_Color textColor;
+    TTF_Font* f;
+    SDL_Rect rubrRect;
+    SDL_Texture* rubrText;
     
     //void clean();
     

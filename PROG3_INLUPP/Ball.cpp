@@ -14,6 +14,8 @@ namespace game {
     }
     
     Ball::Ball(GameEngine* ge, int x, int y, int w, int h) : Sprite(ge, x, y, w, h) {
+        bWidth = w;
+        bHeight = h;
         
         SDL_Surface* surf = IMG_Load("/Users/viktorplane/Documents/git/PROG3_INLUPP/ball.png");
         if(surf == NULL)
@@ -53,6 +55,19 @@ namespace game {
     void Ball::draw() {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
     }
+    
+    int Ball::getWidth() {
+        return bWidth;
+    }
+    
+    int Ball::getHeight() {
+        return bHeight;
+    }
+    
+    /*
+    void Ball::intersectsWith(Brick* brick) {
+        
+    }*/
     
     Ball::~Ball() {
         SDL_DestroyTexture(ture);

@@ -17,18 +17,53 @@ namespace game {
         
     }
     
-    /*
-    void Brick::setId(int ident) {
-        id = ident;
-    }*/
-    
-    int Brick::getId() {
-        return id;
+    bool Brick::intersectsWith(Ball* ball) {
+        if(rect.x + rect.w < ball->getX() || rect.x > ball->getX() + ball->getWidth() || rect.y + rect.h < ball->getY() || rect.y > ball->getY() + ball->getHeight()) {
+            return false;
+        } else
+            return true;
     }
     
     Brick::Brick(GameEngine* ge, int x, int y, int w, int h, int ident) : Sprite(ge, x, y, w, h) {
+        bWidth = w;
+        bHeight = h;
         id = ident;
-        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Documents/git/PROG3_INLUPP/block.png");
+        
+        SDL_Surface* surf;
+        
+        switch(ident) {
+            case 0: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/bluebrick.png");
+                points = 10;
+                break;
+            }
+            case 1: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/brownbrick.png");
+                points = 5;
+                break;
+            }
+            case 2: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/purplebrick.png");
+                points = 15;
+                break;
+            }
+            case 4: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/bluebrick.png");
+                points = 5;
+                break;
+            }
+            case 5: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/brownbrick.png");
+                points = 10;
+                break;
+            }
+            case 6: {
+                surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/bluebrick.png");
+                points = 15;
+                break;
+            }
+        }
+        
         if(surf == NULL)
             std::cout << "Unable to load Brick image" << std::endl;
         
@@ -40,6 +75,14 @@ namespace game {
     void Brick::draw() {
         if(!hit)
             SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
+    }
+    
+    int Brick::getWidth() {
+        return bWidth;
+    }
+    
+    int Brick::getHeight() {
+        return bHeight;
     }
     
     Brick::~Brick() {

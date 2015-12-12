@@ -53,9 +53,9 @@
 		5D9A3BCA1C1967C900550046 /* Brick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Brick.hpp; sourceTree = "<group>"; };
 		5DA492111C17886D00C828CA /* Board.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		5DA492121C17886D00C828CA /* Board.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
-		5DC39AA31C18236A00098BFD /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = PROG3_INLUPP; path = /Users/viktorplane/Documents/git/PROG3_INLUPP/build/Debug/PROG3_INLUPP; sourceTree = "<absolute>"; };
 		5DC39AA41C18BAEF00098BFD /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		5DC39AA51C18BAEF00098BFD /* Ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
+		5DF78DB41C1AB71800F7C800 /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = PROG3_INLUPP; path = /Users/viktorplane/Documents/git/PROG3_INLUPP/build/Debug/PROG3_INLUPP; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +133,7 @@
 			);
 			name = PROG3_INLUPP;
 			productName = PROG3_INLUPP;
-			productReference = 5DC39AA31C18236A00098BFD /* PROG3_INLUPP */;
+			productReference = 5DF78DB41C1AB71800F7C800 /* PROG3_INLUPP */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
