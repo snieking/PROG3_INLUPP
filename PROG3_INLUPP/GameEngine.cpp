@@ -34,8 +34,12 @@ namespace game {
     
 
     void GameEngine::add(Sprite *sprite) {
-        //std::cout << "La till en sprite" << std::endl;
+        std::cout << "La till en sprite" << std::endl;
         sprites.push_back(sprite);
+    }
+    
+    std::vector<Sprite*>GameEngine::getSprites() {
+        return sprites;
     }
     
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
@@ -50,18 +54,23 @@ namespace game {
         brickField = theBrickField;
     }
     
-    void GameEngine::run() {
+    BrickField* GameEngine::getBrickField() {
+        return brickField;
+    }
+    
+    bool GameEngine::newGame() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
         
-        int totalPoints = 0;
+        
         int x = 0;
         int ballY = 1, ballX = 0;
-        SDL_RenderClear(ren);
+        //SDL_RenderClear(ren);
+        //SDL_RenderPresent(ren);
         for (Sprite* s : sprites)
             s->draw();
         
-
+        
         ball->goingLeft = true;
         SDL_RenderPresent(ren);
         bool goOn = true;
@@ -90,39 +99,39 @@ namespace game {
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
-
+            
             for(Brick* brick: brickField->getBricks()) {
-                if(!brick->hit) 
+                if(!brick->hit)
                     if(brick->intersectsWith(ball)) {
                         brick->hit = true;
                         totalPoints += brick->points;
-                        std::cout << "Tog just bort en" << std::endl;
+                        //std::cout << "Tog just bort en" << std::endl;
                         if((brick->getX() + brick->getWidth() == ball->getX())) {
-                            std::cout << "Högerkanten" << std::endl;
+                            //std::cout << "Högerkanten" << std::endl;
                             ball->goingLeft = false;
                         }
                         
                         else if(brick->getX() == ball->getX() + ball->getWidth()) {
                             ball->goingLeft = true;
-                            std::cout << "Vänsterkanten" << std::endl;
+                            //std::cout << "Vänsterkanten" << std::endl;
                         }
                         
                         else if(brick->getY() + brick->getHeight() == ball->getY()) {
                             ball->goingUp = false;
-                            std::cout << "Underkanten" << std::endl;
+                            //std::cout << "Underkanten" << std::endl;
                         }
                         
                         else if((brick->getY() == ball->getY() + ball->getHeight())) {
                             ball->goingUp = true;
-                            std::cout << "Överkanten" << std::endl;
+                            //std::cout << "Överkanten" << std::endl;
                         }
-                                
-                                
+                        
+                        
                         
                     }
-                    
+                
             }
-                       
+            
             // Kolla ifall bollen har träffat en vägg
             if(ball->getX() <= 0)
                 ball->goingLeft = false;
@@ -138,9 +147,9 @@ namespace game {
                         ball->goingLeft = true;
                         ballX = 2;
                     }
-                        
+                    
                     else if(paddle->getX()+ball->getWidth() <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)) {
-                       ball->goingLeft = true;
+                        ball->goingLeft = true;
                         ballX = 1;
                     }
                     else if(paddle->getX()+(paddle->getWidth()/2) <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)+ball->getWidth()) {
@@ -151,9 +160,6 @@ namespace game {
                         ball->goingLeft = false;
                         ballX = 2;
                     }
-                    
-                    //if(ballX == 1)
-                        //ballX = 1;
                 }
             }
             
@@ -161,6 +167,22 @@ namespace game {
             if(ball->released) {
                 ball->move(ballX, ballY);
             }
+            
+            // Kollar om man vunnit
+            int bricksLeft = 0;
+            for(Brick* brick : brickField->getBricks()) {
+                if(!brick->hit)
+                    bricksLeft++;
+            }
+            if(bricksLeft == 0) {
+                return true;
+            }
+            
+            // Kollar om man förlorat
+            if(ball->getY()-ball->getHeight() > HEIGHT) {
+                return false;
+            }
+            
             SDL_RenderClear(ren);
             for (Sprite* s : sprites)
                 s->draw();
@@ -186,6 +208,14 @@ namespace game {
                 SDL_Delay(start - SDL_GetTicks());
             
         } // yttre while
+        return false;
+    } // newGame
+    
+    bool GameEngine::run() {
+        if(newGame())
+            return true;
+        else
+            return false;
     } // run
     
 
@@ -196,6 +226,13 @@ namespace game {
     GameEngine::~GameEngine() {
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
+        delete paddle;
+        delete ball;
+        delete brickField;
+        delete f;
+        SDL_DestroyTexture(rubrText);
+
+        std::cout << "deleted ge" << std::endl;
     }
 
 }

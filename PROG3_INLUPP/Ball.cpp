@@ -54,6 +54,7 @@ namespace game {
     
     void Ball::draw() {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
+        //std::cout << "Ritade ball" << std::endl;
     }
     
     int Ball::getWidth() {

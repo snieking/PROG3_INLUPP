@@ -29,7 +29,7 @@ namespace game {
         bHeight = h;
         id = ident;
         
-        SDL_Surface* surf;
+        SDL_Surface* surf = nullptr;
         
         switch(ident) {
             case 0: {
@@ -47,17 +47,17 @@ namespace game {
                 points = 15;
                 break;
             }
-            case 4: {
+            case 3: {
                 surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/bluebrick.png");
                 points = 5;
                 break;
             }
-            case 5: {
+            case 4: {
                 surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/brownbrick.png");
                 points = 10;
                 break;
             }
-            case 6: {
+            case 5: {
                 surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/bluebrick.png");
                 points = 15;
                 break;
@@ -73,8 +73,11 @@ namespace game {
     }
     
     void Brick::draw() {
-        if(!hit)
+        //std::cout << "Ritade brick" << std::endl;
+        if(!hit) {
             SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
+            //std::cout << "Ritade brick successfully" << std::endl;
+        }
     }
     
     int Brick::getWidth() {

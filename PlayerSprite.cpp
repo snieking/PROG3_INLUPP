@@ -41,6 +41,7 @@ namespace game {
     }
 
     void PlayerSprite::draw() {
+        //std::cout << "Ritade paddel" << std::endl;
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
     }
     

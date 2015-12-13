@@ -1,11 +1,3 @@
-//
-//  GameEngine.hpp
-//  PROG3_INLUPP
-//
-//  Created by Viktor Plane on 04/12/15.
-//  Copyright © 2015 Viktor Plane. All rights reserved.
-//
-
 #ifndef GameEngine_hpp
 #define GameEngine_hpp
 
@@ -27,11 +19,15 @@ class GameEngine {
 public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
+    std::vector<Sprite*> getSprites();
     SDL_Renderer* getRen() const; // borde vara privat egentligen
-    void run();
+    bool run();
+    bool newGame();
     void setPaddle(PlayerSprite* thePaddle);
     void setBall(Ball* theBall);
     void setBrickField(BrickField* theBrickField);
+    BrickField* getBrickField();
+    int totalPoints = 0;
     ~GameEngine();
 private:
     friend class Sprite;
@@ -41,7 +37,7 @@ private:
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
-    const int FPS = 5;
+    const int FPS = 0;
     int WIDTH, HEIGHT;
     SDL_Color textColor;
     TTF_Font* f;
