@@ -20,7 +20,7 @@ int points = 0;
 
 bool freshGame(GameEngine* ge) {
     
-    int level = 5;
+    int level = 1;
     int yVal = 50, xVal = 0;
     
     // Random since c++11
@@ -30,7 +30,7 @@ bool freshGame(GameEngine* ge) {
     int random = 0;
     
     for(int y = 0; y < level; y++) {
-        for(int x = 0; x < 8; x++) {
+        for(int x = 0; x < 1; x++) {
             random = uni(rng);
             switch(random) {
                 case 0: {

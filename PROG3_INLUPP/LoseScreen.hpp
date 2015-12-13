@@ -11,6 +11,7 @@ namespace game {
     public:
         LoseScreen(std::string title, int x, int y, int w, int h, int points);
         void show();
+        ~LoseScreen();
     private:
         int WIDTH, HEIGHT, totalPoints;
         SDL_Window* win;

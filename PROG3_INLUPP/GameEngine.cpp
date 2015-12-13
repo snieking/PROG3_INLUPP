@@ -24,7 +24,8 @@ namespace game {
         ren = SDL_CreateRenderer(win, -1, 0);
     
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
-        
+        // Required?
+        SDL_Init(1);
         TTF_Init();
         
         f = TTF_OpenFont("/Library/Fonts/Futura.ttc", 100);
@@ -61,7 +62,6 @@ namespace game {
     bool GameEngine::newGame() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
-        
         
         int x = 0;
         int ballY = 1, ballX = 0;
@@ -195,10 +195,12 @@ namespace game {
             
             
             rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 25 };
+            
             SDL_FreeSurface(rubrSurf);
             
-            
             SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
+            
+            SDL_DestroyTexture(rubrText);
             
             SDL_RenderPresent(ren);
             
@@ -226,11 +228,15 @@ namespace game {
     GameEngine::~GameEngine() {
         SDL_DestroyRenderer(ren);
         SDL_DestroyWindow(win);
+        for(Brick* brick : brickField->getBricks())
+            delete brick;
         delete paddle;
         delete ball;
         delete brickField;
         delete f;
         SDL_DestroyTexture(rubrText);
+        TTF_Quit();
+        //SDL_Quit();
 
         std::cout << "deleted ge" << std::endl;
     }

@@ -48,11 +48,24 @@ namespace game {
             
             SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
             
+            SDL_DestroyTexture(rubrText);
+            
             SDL_RenderPresent(ren);
             
         } // outer-while
         
     } // show
+    
+    LoseScreen::~LoseScreen() {
+        SDL_DestroyRenderer(ren);
+        SDL_DestroyWindow(win);
+        delete f;
+        SDL_DestroyTexture(rubrText);
+        TTF_Quit();
+        SDL_Quit();
+        
+        
+    }
     
     
 }
