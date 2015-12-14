@@ -1,6 +1,7 @@
 #include "LoseScreen.hpp"
 #include <string>
 #include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
 #include <SDL2_ttf/SDL_ttf.h>
 #include <iostream>
 
@@ -16,9 +17,16 @@ namespace game {
         
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
         
+        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/playagain.png");
+        if(surf == NULL)
+            std::cout << "Unable to load image" << std::endl;
+        
+        ture = SDL_CreateTextureFromSurface(ren, surf);
+        SDL_FreeSurface(surf);
+        
         TTF_Init();
         
-        f = TTF_OpenFont("/Library/Fonts/Futura.ttc", 100);
+        f = TTF_OpenFont("/Library/Fonts/Arial Black.ttf", 100);
         textColor = {255, 255, 255};
         
     }
@@ -37,6 +45,8 @@ namespace game {
             
             SDL_RenderClear(ren);
             
+            
+            
             std::string printpoints = "Congratulations, you got " + std::to_string(totalPoints) + " points!";
             
             SDL_Surface* rubrSurf = TTF_RenderText_Solid(f, printpoints.c_str(), textColor);
@@ -44,7 +54,11 @@ namespace game {
             rubrText = SDL_CreateTextureFromSurface(ren, rubrSurf);
             
             rubrRect = { 50, 250, 700, 100 };
+            SDL_Rect picRect = { 300, 350, 150, 150 };
             SDL_FreeSurface(rubrSurf);
+            
+            SDL_RenderCopy(ren, ture, NULL, &picRect);
+            
             
             SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
             
@@ -61,6 +75,7 @@ namespace game {
         SDL_DestroyWindow(win);
         delete f;
         SDL_DestroyTexture(rubrText);
+        SDL_DestroyTexture(ture);
         TTF_Quit();
         SDL_Quit();
         

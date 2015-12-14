@@ -73,10 +73,8 @@ namespace game {
     }
     
     void Brick::draw() {
-        //std::cout << "Ritade brick" << std::endl;
         if(!hit) {
             SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
-            //std::cout << "Ritade brick successfully" << std::endl;
         }
     }
     

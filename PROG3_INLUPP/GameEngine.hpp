@@ -3,7 +3,7 @@
 
 #include <string>
 #include <SDL2/SDL.h>
-#include <vector>
+#include <list>
 #include "Sprite.hpp"
 #include "PlayerSprite.hpp"
 #include "Ball.hpp"
@@ -19,9 +19,10 @@ class GameEngine {
 public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
-    std::vector<Sprite*> getSprites();
+    std::list<Sprite*>& getSprites();
     SDL_Renderer* getRen() const; // borde vara privat egentligen
     bool run();
+    bool mainMenu();
     bool newGame();
     void setPaddle(PlayerSprite* thePaddle);
     void setBall(Ball* theBall);
@@ -33,7 +34,7 @@ private:
     friend class Sprite;
     SDL_Window* win;
     SDL_Renderer* ren;
-    std::vector<Sprite*> sprites;
+    std::list<Sprite*> sprites;
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
@@ -42,7 +43,10 @@ private:
     SDL_Color textColor;
     TTF_Font* f;
     SDL_Rect rubrRect;
+    SDL_Rect createdByRect;
     SDL_Texture* rubrText;
+    SDL_Texture* createdByText;
+    SDL_Texture* newGameTexture;
     
     //void clean();
     

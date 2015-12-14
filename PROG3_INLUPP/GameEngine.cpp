@@ -25,21 +25,20 @@ namespace game {
     
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
         // Required?
-        SDL_Init(1);
+ 
         TTF_Init();
         
-        f = TTF_OpenFont("/Library/Fonts/Futura.ttc", 100);
+        f = TTF_OpenFont("/Library/Fonts/Arial Black.ttf", 100);
         textColor = {255, 255, 255};
         
     }
     
 
     void GameEngine::add(Sprite *sprite) {
-        std::cout << "La till en sprite" << std::endl;
         sprites.push_back(sprite);
     }
     
-    std::vector<Sprite*>GameEngine::getSprites() {
+    std::list<Sprite*>& GameEngine::getSprites() {
         return sprites;
     }
     
@@ -59,9 +58,60 @@ namespace game {
         return brickField;
     }
     
+    bool GameEngine::mainMenu() {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+        int newGameX = (WIDTH/2)-100, newGameY = (HEIGHT/2)-75, newGameW = 200, newGameH = 75;
+        
+        bool goOn = true;
+        while(goOn) {
+            SDL_Event eve;
+            while(SDL_PollEvent(&eve)) {
+                switch (eve.type) {
+                    case SDL_QUIT:
+                        goOn = false; break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        if (eve.button.x >= newGameX && eve.button.x <= newGameX+(newGameW/2) && eve.button.y >= newGameY && eve.button.y <= (HEIGHT/2)) {
+                            return true;
+                        }
+                        
+                } // switch
+            } // inner-while
+            
+            SDL_RenderClear(ren);
+            
+            SDL_Surface* newGameSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/play_button.png");
+            if(newGameSurf == NULL)
+                std::cout << "Unable to load image" << std::endl;
+            
+            newGameTexture = SDL_CreateTextureFromSurface(ren, newGameSurf);
+            SDL_FreeSurface(newGameSurf);
+            
+            SDL_Rect newGameRect = { newGameX, newGameY, newGameW, newGameH };
+            
+            SDL_RenderCopy(ren, newGameTexture, NULL, &newGameRect);
+            
+            std::string createdBy = "Viktor Plane and Olof Hofstedt (PROG3 2015-16)";
+            
+            SDL_Surface* createdBySurf = TTF_RenderText_Solid(f, createdBy.c_str(), textColor);
+            
+            createdByText = SDL_CreateTextureFromSurface(ren, createdBySurf);
+            
+            createdByRect = { WIDTH - (WIDTH/2)-10, HEIGHT-25, WIDTH/2, 20 };
+            SDL_FreeSurface(createdBySurf);
+            
+            SDL_RenderCopy(ren, createdByText, NULL, &createdByRect);
+            SDL_DestroyTexture(createdByText);
+            SDL_RenderPresent(ren);
+            
+            
+        } // outer-while
+        return false;
+    } // mainMenu
+    
     bool GameEngine::newGame() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
+        
         
         int x = 0;
         int ballY = 1, ballX = 0;
@@ -194,7 +244,8 @@ namespace game {
             rubrText = SDL_CreateTextureFromSurface(ren, rubrSurf);
             
             
-            rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 25 };
+            rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 50 };
+            
             
             SDL_FreeSurface(rubrSurf);
             
@@ -236,7 +287,6 @@ namespace game {
         delete f;
         SDL_DestroyTexture(rubrText);
         TTF_Quit();
-        //SDL_Quit();
 
         std::cout << "deleted ge" << std::endl;
     }

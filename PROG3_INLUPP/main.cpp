@@ -20,7 +20,7 @@ int points = 0;
 
 bool freshGame(GameEngine* ge) {
     
-    int level = 1;
+    int level = 4;
     int yVal = 50, xVal = 0;
     
     // Random since c++11
@@ -30,7 +30,7 @@ bool freshGame(GameEngine* ge) {
     int random = 0;
     
     for(int y = 0; y < level; y++) {
-        for(int x = 0; x < 1; x++) {
+        for(int x = 0; x < 8; x++) {
             random = uni(rng);
             switch(random) {
                 case 0: {
@@ -74,12 +74,12 @@ bool freshGame(GameEngine* ge) {
     
     if(ge->run()) {
         points = ge->totalPoints;
-        delete ge;
+        //delete ge;
         return true;
     }
     else {
         points = ge->totalPoints;
-        delete ge;
+        //delete ge;
         return false;
     }
 
@@ -91,26 +91,22 @@ bool freshGame(GameEngine* ge) {
 int main(int argc, const char * argv[]) {
     try {
         GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+        /*
         Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);
         ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
         Sprite* s2 = Ball::getInstance(ge, 400, s1->getY()-20, 20, 20);
         ge->setBall(dynamic_cast<Ball*>(s2));
         BrickField* brickField = new BrickField(9);
         ge->setBrickField(brickField);
+        */
         
         
         bool gameOn = true;
-        if(!(freshGame(ge)))
+        if(!(ge->mainMenu()))
             gameOn = false;
         while(gameOn){
-            //int points = ge->totalPoints;
-            cout << "Ska ta bort ge" << endl;
-            //delete ge;
-            //delete s1;
-            //delete s2;
-            //delete brickField;
-            cout << "Nytt varv freshGame()" << std::endl;
-            GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+            ge->getSprites().clear();
+
             Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);
             ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
             Sprite* s2 = Ball::getInstance(ge, 400, s1->getY()-20, 20, 20);
@@ -118,14 +114,21 @@ int main(int argc, const char * argv[]) {
             BrickField* brickField = new BrickField(9);
             ge->setBrickField(brickField);
             ge->totalPoints = points;
-            if(!(freshGame(ge)))
+            if(!(freshGame(ge))) {
+                LoseScreen* ls = new LoseScreen("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, points);
+                ls->show();
+                cout << "Färdigt" << endl;
+                delete ls;
                 gameOn = false;
+            }
         }
         
+        /*
         cout << "Färdigt" << endl;
         LoseScreen* ls = new LoseScreen("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, points);
         ls->show();
         delete ls;
+        */
         
     } catch (runtime_error& e) {
         cerr << e.what() << endl;

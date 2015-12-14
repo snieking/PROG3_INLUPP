@@ -20,6 +20,7 @@ namespace game {
         TTF_Font* f;
         SDL_Rect rubrRect;
         SDL_Texture* rubrText;
+        SDL_Texture* ture;
         
     };
 }
