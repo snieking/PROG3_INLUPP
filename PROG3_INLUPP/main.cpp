@@ -106,7 +106,6 @@ int main(int argc, const char * argv[]) {
             gameOn = false;
         while(gameOn){
             ge->getSprites().clear();
-
             Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);
             ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
             Sprite* s2 = Ball::getInstance(ge, 400, s1->getY()-20, 20, 20);
@@ -114,21 +113,17 @@ int main(int argc, const char * argv[]) {
             BrickField* brickField = new BrickField(9);
             ge->setBrickField(brickField);
             ge->totalPoints = points;
+            
             if(!(freshGame(ge))) {
-                LoseScreen* ls = new LoseScreen("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, points);
-                ls->show();
-                cout << "Färdigt" << endl;
-                delete ls;
-                gameOn = false;
+                if(!ge->gameOver())
+                    gameOn = false;
+                else
+                    if(!ge->mainMenu())
+                        gameOn = false;
             }
         }
         
-        /*
-        cout << "Färdigt" << endl;
-        LoseScreen* ls = new LoseScreen("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, points);
-        ls->show();
-        delete ls;
-        */
+        delete ge;
         
     } catch (runtime_error& e) {
         cerr << e.what() << endl;

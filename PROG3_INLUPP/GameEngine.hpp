@@ -24,6 +24,7 @@ public:
     bool run();
     bool mainMenu();
     bool newGame();
+    bool gameOver();
     void setPaddle(PlayerSprite* thePaddle);
     void setBall(Ball* theBall);
     void setBrickField(BrickField* theBrickField);
@@ -48,9 +49,12 @@ private:
     SDL_Texture* createdByText;
     SDL_Texture* newGameTexture;
     
-    //void clean();
+    /* main Menu */
     
-    //SDL_Texture* ture;
+    
+    /* game Over */
+    SDL_Texture* scoreTexture;
+    SDL_Texture* mainMenuTexture;
 };
     
 }
