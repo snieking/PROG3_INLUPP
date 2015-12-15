@@ -23,7 +23,7 @@ bool freshGame(GameEngine* ge) {
     int level = 4;
     int yVal = 50, xVal = 0;
     
-    // Random since c++11
+    /* Random since c++11 */
     random_device rd;
     mt19937 rng(rd());
     uniform_int_distribution<int> uni(0,5);
@@ -102,10 +102,10 @@ int main(int argc, const char * argv[]) {
             if(!(freshGame(ge))) {
                 if(!ge->gameOver())
                     gameOn = false;
-                else
+            } else {
                     if(!ge->mainMenu())
                         gameOn = false;
-            }
+                }
         }
         
         delete ge;

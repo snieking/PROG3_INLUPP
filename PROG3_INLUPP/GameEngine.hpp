@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <list>
+#include <map>
 #include "Sprite.hpp"
 #include "PlayerSprite.hpp"
 #include "Ball.hpp"
@@ -20,10 +21,11 @@ public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
     std::list<Sprite*>& getSprites();
-    SDL_Renderer* getRen() const; // borde vara privat egentligen
+    SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
     bool run();
     bool mainMenu();
     bool newGame();
+    bool highScore();
     bool gameOver();
     void setPaddle(PlayerSprite* thePaddle);
     void setBall(Ball* theBall);
@@ -48,11 +50,18 @@ private:
     SDL_Texture* rubrText;
     SDL_Texture* createdByText;
     SDL_Texture* newGameTexture;
+    SDL_Texture* highscoreTexture;
     
     /* main Menu */
     
+    /* high Score */
+    std::multimap<int, std::string, std::greater<int>> scores;
+    
+    /* new Game */
+    bool newGameInitialized = false;
     
     /* game Over */
+    bool gameOverInitialized = false;
     SDL_Texture* scoreTexture;
     SDL_Texture* mainMenuTexture;
 };
