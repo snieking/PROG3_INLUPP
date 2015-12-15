@@ -64,7 +64,6 @@ bool freshGame(GameEngine* ge) {
                     ge->getBrickField()->add(dynamic_cast<Brick*>(red));
                     break;
                 }
-                    
             }
             xVal += 100;
         }
@@ -74,36 +73,22 @@ bool freshGame(GameEngine* ge) {
     
     if(ge->run()) {
         points = ge->totalPoints;
-        //delete ge;
         return true;
     }
     else {
         points = ge->totalPoints;
-        //delete ge;
         return false;
     }
 
 }
 
-
-
-
 int main(int argc, const char * argv[]) {
     try {
         GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
-        /*
-        Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);
-        ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
-        Sprite* s2 = Ball::getInstance(ge, 400, s1->getY()-20, 20, 20);
-        ge->setBall(dynamic_cast<Ball*>(s2));
-        BrickField* brickField = new BrickField(9);
-        ge->setBrickField(brickField);
-        */
-        
-        
         bool gameOn = true;
         if(!(ge->mainMenu()))
             gameOn = false;
+        
         while(gameOn){
             ge->getSprites().clear();
             Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);

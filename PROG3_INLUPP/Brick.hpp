@@ -5,7 +5,7 @@
 #include "Ball.hpp"
 #include <SDL2/SDL.h>
 
-// Ta bort ident
+/* Fixa så att brickor tas bort ifall träffade */
 
 namespace game {
     class Brick : public Sprite {

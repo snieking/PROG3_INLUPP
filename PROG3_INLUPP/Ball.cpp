@@ -54,7 +54,6 @@ namespace game {
     
     void Ball::draw() {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
-        //std::cout << "Ritade ball" << std::endl;
     }
     
     int Ball::getWidth() {
@@ -64,11 +63,6 @@ namespace game {
     int Ball::getHeight() {
         return bHeight;
     }
-    
-    /*
-    void Ball::intersectsWith(Brick* brick) {
-        
-    }*/
     
     Ball::~Ball() {
         SDL_DestroyTexture(ture);

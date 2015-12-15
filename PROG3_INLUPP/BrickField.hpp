@@ -1,11 +1,3 @@
-//
-//  BrickField.hpp
-//  PROG3_INLUPP
-//
-//  Created by Viktor Plane on 10/12/15.
-//  Copyright © 2015 Viktor Plane. All rights reserved.
-//
-
 #ifndef BrickField_hpp
 #define BrickField_hpp
 
