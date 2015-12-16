@@ -25,7 +25,7 @@ public:
     bool run();
     bool mainMenu();
     bool newGame();
-    bool highScore();
+    void highScore();
     bool gameOver();
     void setPaddle(PlayerSprite* thePaddle);
     void setBall(Ball* theBall);
@@ -62,8 +62,6 @@ private:
     
     /* game Over */
     bool gameOverInitialized = false;
-    SDL_Texture* scoreTexture;
-    SDL_Texture* mainMenuTexture;
 };
     
 }

@@ -76,7 +76,7 @@ bool freshGame(GameEngine* ge) {
         return true;
     }
     else {
-        points = ge->totalPoints;
+        points = 0;
         return false;
     }
 
@@ -99,13 +99,14 @@ int main(int argc, const char * argv[]) {
             ge->setBrickField(brickField);
             ge->totalPoints = points;
             
-            if(!(freshGame(ge))) {
+            if(!(freshGame(ge)))
                 if(!ge->gameOver())
                     gameOn = false;
-            } else {
+                else {
                     if(!ge->mainMenu())
                         gameOn = false;
                 }
+            
         }
         
         delete ge;

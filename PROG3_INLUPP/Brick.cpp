@@ -13,6 +13,7 @@ namespace game {
         return new Brick(ge, x, y, w, h, ident);
     }
     
+    /* Ska inte finnas för Brick, fixa med klasshierarki */
     void Brick::move(int xPos, int yPos) {
         
     }

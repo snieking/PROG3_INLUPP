@@ -52,12 +52,13 @@ namespace game {
     bool GameEngine::mainMenu() {
         SDL_SetRelativeMouseMode(SDL_FALSE);
         
+        /* Återställer points */
+        totalPoints = 0;
+        
         // Skriver ut listan
         for (std::multimap<int,std::string>::iterator it=scores.begin(); it!=scores.end(); ++it)
             std::cout << (*it).first << " => " << (*it).second << '\n';
         
-        /* Återställer points */
-        totalPoints = 0;
         
         int newGameX = (WIDTH/2)-100, newGameY = (HEIGHT/2)-75, newGameW = 250, newGameH = 75;
         int highscoreX = (WIDTH/2)-100, highscoreY = newGameY+newGameH+10, highscoreW = newGameW, highscoreH = newGameH;
@@ -97,9 +98,10 @@ namespace game {
                     case SDL_MOUSEBUTTONDOWN:
                         if (eve.button.x >= newGameX && eve.button.x <= newGameX+newGameW && eve.button.y >= newGameY && eve.button.y <= newGameY+newGameH) {
                             return true;
+                            break;
                         }
                         if (eve.button.x >= highscoreX && eve.button.x <= highscoreX+highscoreW && eve.button.y >= highscoreY && eve.button.y <= highscoreY+highscoreH) {
-                            std::cout << "Highscore pressed" << std::endl;
+                            highScore();
                         }
                         
                 } // switch
@@ -257,22 +259,137 @@ namespace game {
         return false;
     } // newGame
     
-    bool GameEngine::highScore() {
-        return true; // TO-DO
-    }
+    void GameEngine::highScore() {
+        SDL_SetRelativeMouseMode(SDL_FALSE);
+        std::string scoreOne = "1: ...", scoreTwo = "2: ...", scoreThree = "3: ...", scoreFour = "4: ...", scoreFive = "5: ...";
+        int menuW = 250, menuH = 75, menuX = WIDTH/2-(menuW/2), menuY = (HEIGHT/2)+150;
+        
+        std::multimap<int, std::string>::iterator it = scores.begin();
+        if(scores.size() > 0) {
+            scoreOne = "1: " + std::to_string(it->first) + " => " + it->second;
+            std::cout << scoreOne << std::endl;
+            it++;
+        }
+        if(scores.size() > 1) {
+            scoreTwo = "2: " + std::to_string(it->first) + " => " + it->second;
+            std::cout << scoreTwo << std::endl;
+            it++;
+        }
+        if(scores.size() > 2) {
+            scoreThree = "3: " + std::to_string(it->first) + " => " + it->second;
+            it++;
+        }
+        if(scores.size() > 3) {
+            scoreFour = "4: " + std::to_string(it->first) + " => " + it->second;
+            it++;
+        }
+        if(scores.size() > 4) {
+            scoreFive = "5: " + std::to_string(it->first) + " => " + it->second;
+            it++;
+        }
+        
+        
+        SDL_Surface* firstSurf = TTF_RenderText_Solid(f, scoreOne.c_str(), textColor);
+        SDL_Texture* firstTexture = SDL_CreateTextureFromSurface(ren, firstSurf);
+        SDL_FreeSurface(firstSurf);
+        SDL_Rect firstRect = { (WIDTH/2)-100, 110, 200, 50 };
+        
+        SDL_Surface* secondSurf = TTF_RenderText_Solid(f, scoreTwo.c_str(), textColor);
+        SDL_Texture* secondTexture = SDL_CreateTextureFromSurface(ren, secondSurf);
+        SDL_FreeSurface(secondSurf);
+        SDL_Rect secondRect = { (WIDTH/2)-100, 170, 200, 50 };
+        
+        SDL_Surface* thirdSurf = TTF_RenderText_Solid(f, scoreThree.c_str(), textColor);
+        SDL_Texture* thirdTexture = SDL_CreateTextureFromSurface(ren, thirdSurf);
+        SDL_FreeSurface(thirdSurf);
+        SDL_Rect thirdRect = { (WIDTH/2)-100, 230, 200, 50 };
+        
+        SDL_Surface* fourthSurf = TTF_RenderText_Solid(f, scoreFour.c_str(), textColor);
+        SDL_Texture* fourthTexture = SDL_CreateTextureFromSurface(ren, fourthSurf);
+        SDL_FreeSurface(fourthSurf);
+        SDL_Rect fourthRect = { (WIDTH/2)-100, 290, 200, 50 };
+        
+        SDL_Surface* fifthSurf = TTF_RenderText_Solid(f, scoreFive.c_str(), textColor);
+        SDL_Texture* fifthTexture = SDL_CreateTextureFromSurface(ren, fifthSurf);
+        SDL_FreeSurface(fifthSurf);
+        SDL_Rect fifthRect = { (WIDTH/2)-100, 360, 200, 50 };
+        
+        SDL_Surface* menuSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/menu.png");
+        SDL_Texture* menuTexture = SDL_CreateTextureFromSurface(ren, menuSurf);
+        SDL_FreeSurface(menuSurf);
+        SDL_Rect menuRect = { menuX, menuY, menuW, menuH };
+        
+        
+        // goOn
+        bool goOn = true;
+        while(goOn) {
+            SDL_Event eve;
+            while(SDL_PollEvent(&eve)) {
+                switch (eve.type) {
+                    case SDL_QUIT:
+                        goOn = false; break;
+                    case SDL_MOUSEBUTTONDOWN:
+                        if (eve.button.x >= menuX && eve.button.x <= menuX+menuW && eve.button.y >= menuY && eve.button.y <= menuY + menuH) {
+                            goOn = false;
+                            break;
+                        }
+                    
+                        
+                } // switch
+            } // inner-while
+            
+            SDL_RenderClear(ren);
+            
+            SDL_RenderCopy(ren, firstTexture, NULL, &firstRect);
+            SDL_RenderCopy(ren, secondTexture, NULL, &secondRect);
+            SDL_RenderCopy(ren, thirdTexture, NULL, &thirdRect);
+            SDL_RenderCopy(ren, fourthTexture, NULL, &fourthRect);
+            SDL_RenderCopy(ren, fifthTexture, NULL, &fifthRect);
+            SDL_RenderCopy(ren, menuTexture, NULL, &menuRect);
+            
+            SDL_RenderPresent(ren);
+            
+        } // outer-while
+        
+        
+        
+        SDL_DestroyTexture(firstTexture);
+        SDL_DestroyTexture(secondTexture);
+        SDL_DestroyTexture(thirdTexture);
+        SDL_DestroyTexture(fourthTexture);
+        SDL_DestroyTexture(fifthTexture);
+        SDL_DestroyTexture(menuTexture);
+        
+    } // highscore
+    
+    
+    
     
     bool GameEngine::gameOver() {
+        int submitX = 425, submitY = 300, submitW = 250, submitH = 75;
         SDL_SetRelativeMouseMode(SDL_FALSE);
         gameOverInitialized = true;
         int mainMenuW = 250, mainMenuH = 75, mainMenuX = WIDTH/2-(mainMenuW/2), mainMenuY = (HEIGHT/2)+150;
-        scores.insert(std::pair<int, std::string>(totalPoints, "Viktor"));
+        bool scoreSubmited = false;
         
         // Points texture
         std::string printpoints = "Congratulations, you got " + std::to_string(totalPoints) + " points!";
         SDL_Surface* scoreSurf = TTF_RenderText_Solid(f, printpoints.c_str(), textColor);
-        scoreTexture = SDL_CreateTextureFromSurface(ren, scoreSurf);
+        SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(ren, scoreSurf);
         SDL_FreeSurface(scoreSurf);
-        SDL_Rect scoreRect = { 50, 250, 700, 100 };
+        SDL_Rect scoreRect = { 50, 100, 700, 100 };
+        
+        std::string enterName = "Enter Name: ";
+        SDL_Surface* enterNameSurf = TTF_RenderText_Solid(f, enterName.c_str(), textColor);
+        SDL_Texture* enterNameTexture = SDL_CreateTextureFromSurface(ren, enterNameSurf);
+        SDL_FreeSurface(enterNameSurf);
+        SDL_Rect enterNameRect = { 100, 300, 100, 50 };
+        
+        SDL_Surface* submitSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/submit.png");
+        SDL_Texture* submitTexture = SDL_CreateTextureFromSurface(ren, submitSurf);
+        SDL_FreeSurface(submitSurf);
+        SDL_Rect submitRect = { submitX, submitY, submitW, submitH };
+        
         
         // Main menu button
         SDL_Surface* mainMenuSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/menu.png");
@@ -281,6 +398,10 @@ namespace game {
         SDL_Texture* mainMenuTexture = SDL_CreateTextureFromSurface(ren, mainMenuSurf);
         SDL_FreeSurface(mainMenuSurf);
         SDL_Rect mainMenuRect = { mainMenuX, mainMenuY, mainMenuW, mainMenuH };
+        
+        // text
+        std::string text = "";
+        SDL_StartTextInput();
         
         // goOn
         bool backToMainMenu = false;
@@ -297,16 +418,50 @@ namespace game {
                             goOn = false;
                             break;
                         }
+                        else if(eve.button.x >= submitX && eve.button.x <= submitX+submitW && eve.button.y >= submitY && eve.button.y <= submitY + submitH)
+                            if(!scoreSubmited) {
+                                scores.insert(std::pair<int, std::string>(totalPoints, text));
+                                text = "Submited!";
+                                scoreSubmited = true;
+                            }
+                    case SDL_TEXTINPUT:
+                        system("cls");
+                        text += eve.text.text;
+                        break;
+                        
+                    case SDL_KEYDOWN:
+                        if(eve.key.keysym.sym == SDLK_BACKSPACE && text.length() > 0)
+                            text = text.substr(0, text.length() - 1);
+                        break;
+
                 } // switch
             } // inner-while
             
+            SDL_Surface* nameInputSurf = TTF_RenderText_Solid(f, text.c_str(), textColor);
+            SDL_Texture* nameInputTexture = SDL_CreateTextureFromSurface(ren, nameInputSurf);
+            SDL_FreeSurface(nameInputSurf);
+            SDL_Rect nameInputRect = { 210, 300, 200, 50 };
+            
             SDL_RenderClear(ren);
             SDL_RenderCopy(ren, scoreTexture, NULL, &scoreRect);
+            SDL_RenderCopy(ren, enterNameTexture, NULL, &enterNameRect);
+            SDL_RenderCopy(ren, submitTexture, NULL, &submitRect);
             SDL_RenderCopy(ren, mainMenuTexture, NULL, &mainMenuRect);
+            SDL_RenderCopy(ren, nameInputTexture, NULL, &nameInputRect);
+            SDL_DestroyTexture(nameInputTexture);
             SDL_RenderPresent(ren);
             
         } // outer-while
-
+        
+        std::cout << "Ska destroya ltie saker" << std::endl;
+        SDL_StopTextInput();
+        SDL_DestroyTexture(submitTexture);
+        SDL_DestroyTexture(enterNameTexture);
+        SDL_DestroyTexture(mainMenuTexture);
+        SDL_DestroyTexture(scoreTexture);
+        totalPoints = 0;
+        
+        
         return backToMainMenu;
     }
     
@@ -337,11 +492,9 @@ namespace game {
         }
         
         if(gameOverInitialized) {
-            SDL_DestroyTexture(scoreTexture);
             SDL_DestroyTexture(rubrText);
         }
         
-        SDL_DestroyTexture(mainMenuTexture);
         SDL_DestroyTexture(createdByText);
         TTF_Quit();
     }
