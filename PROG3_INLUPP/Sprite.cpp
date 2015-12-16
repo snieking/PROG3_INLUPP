@@ -7,17 +7,19 @@ namespace game {
         ge->add(this);
     }
     
+    /*
     int Sprite::getX() {
         return rect.x;
-    }
+    }*/
     
     void Sprite::setX(int newX) {
         rect.x = newX;
     }
     
+    /*
     int Sprite::getY() {
         return rect.y;
-    }
+    }*/
 
     Sprite::~Sprite() {
     

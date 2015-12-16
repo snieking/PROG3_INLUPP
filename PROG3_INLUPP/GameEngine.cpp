@@ -29,10 +29,6 @@ namespace game {
         sprites.push_back(sprite);
     }
     
-    std::list<Sprite*>& GameEngine::getSprites() {
-        return sprites;
-    }
-    
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
         paddle = thePaddle;
     }
@@ -51,14 +47,6 @@ namespace game {
     
     bool GameEngine::mainMenu() {
         SDL_SetRelativeMouseMode(SDL_FALSE);
-        
-        /* Återställer points */
-        totalPoints = 0;
-        
-        // Skriver ut listan
-        for (std::multimap<int,std::string>::iterator it=scores.begin(); it!=scores.end(); ++it)
-            std::cout << (*it).first << " => " << (*it).second << '\n';
-        
         
         int newGameX = (WIDTH/2)-100, newGameY = (HEIGHT/2)-75, newGameW = 250, newGameH = 75;
         int highscoreX = (WIDTH/2)-100, highscoreY = newGameY+newGameH+10, highscoreW = newGameW, highscoreH = newGameH;
@@ -425,7 +413,6 @@ namespace game {
                                 scoreSubmited = true;
                             }
                     case SDL_TEXTINPUT:
-                        system("cls");
                         text += eve.text.text;
                         break;
                         
@@ -453,14 +440,11 @@ namespace game {
             
         } // outer-while
         
-        std::cout << "Ska destroya ltie saker" << std::endl;
         SDL_StopTextInput();
         SDL_DestroyTexture(submitTexture);
         SDL_DestroyTexture(enterNameTexture);
         SDL_DestroyTexture(mainMenuTexture);
         SDL_DestroyTexture(scoreTexture);
-        totalPoints = 0;
-        
         
         return backToMainMenu;
     }

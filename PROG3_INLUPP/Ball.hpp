@@ -14,7 +14,8 @@ namespace game {
         bool released = false;
         bool goingUp = false;
         bool goingLeft = false;
-        int getHeight(), getWidth();
+        int getHeight() { return bHeight; }
+        int getWidth() { return bWidth; }
         //void intersectsWith(Brick* brick);
         ~Ball();
     protected:

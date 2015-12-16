@@ -8,16 +8,16 @@
 namespace game {
     class BrickField {
     public:
-        std::vector<Brick*> getBricks();
+        std::vector<Brick*> getBricks() { return bricks; }
         void add(Brick* brick);
         BrickField(int rows);
-        int getBrickRows();
+        int getBrickRows() { return brickRows; }
         ~BrickField();
     private:
         int brickRows;
         BrickField(const BrickField&) = delete;
         const BrickField& operator=(const BrickField&) = delete;
-        std::vector<Brick*> bricks; // matrix
+        std::vector<Brick*> bricks;
     };
 }
 

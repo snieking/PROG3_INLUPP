@@ -14,7 +14,8 @@ namespace game {
         void move(int xPos, int yPos);
         static Brick* getInstance(GameEngine* ge, int x, int y, int w, int h, int ident);
         bool hit = false;
-        int getWidth(), getHeight();
+        int getWidth() { return bWidth; }
+        int getHeight() { return bHeight; }
         bool intersectsWith(Ball* ball);
         int points;
         ~Brick();

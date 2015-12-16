@@ -56,14 +56,6 @@ namespace game {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
     }
     
-    int Ball::getWidth() {
-        return bWidth;
-    }
-    
-    int Ball::getHeight() {
-        return bHeight;
-    }
-    
     Ball::~Ball() {
         SDL_DestroyTexture(ture);
     }

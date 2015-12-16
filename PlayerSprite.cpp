@@ -37,14 +37,6 @@ namespace game {
         SDL_RenderCopy(win->getRen(), ture, NULL, &rect);
     }
     
-    int PlayerSprite::getWidth() {
-        return pWidth;
-    }
-    
-    int PlayerSprite::getHeight() {
-        return pHeight;
-    }
-    
     PlayerSprite::~PlayerSprite() {
         SDL_DestroyTexture(ture);
     }

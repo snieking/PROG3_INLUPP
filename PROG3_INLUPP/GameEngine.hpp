@@ -20,7 +20,7 @@ class GameEngine {
 public:
     GameEngine(std::string title, int x, int y, int w, int h);
     void add(Sprite* sprite);
-    std::list<Sprite*>& getSprites();
+    std::list<Sprite*>& getSprites() { return sprites; }
     SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
     bool run();
     bool mainMenu();

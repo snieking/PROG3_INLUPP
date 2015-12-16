@@ -79,14 +79,6 @@ namespace game {
         }
     }
     
-    int Brick::getWidth() {
-        return bWidth;
-    }
-    
-    int Brick::getHeight() {
-        return bHeight;
-    }
-    
     Brick::~Brick() {
         SDL_DestroyTexture(ture);
     }

@@ -11,9 +11,9 @@ namespace game {
     public:
         virtual void draw() = 0;
         virtual void move(int xPos, int yPos) = 0;
-        int getX();
+        int getX() const { return rect.x; }
         void setX(int newX);
-        int getY();
+        int getY() const { return rect.y; }
         virtual ~Sprite();
     protected:
         Sprite(GameEngine* ge, int x, int y, int w, int h);

@@ -12,8 +12,8 @@ namespace game {
         void draw();
         void move(int xPos, int yPos);
         static PlayerSprite* getInstance(GameEngine* ge, int x, int y, int w, int h);
-        int getWidth(), getHeight();
-        
+        int getWidth() { return pWidth; }
+        int getHeight() { return pHeight; }
         ~PlayerSprite();
     protected:
         PlayerSprite(GameEngine* ge, int x, int y, int w, int h);

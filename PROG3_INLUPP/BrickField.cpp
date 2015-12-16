@@ -8,17 +8,14 @@ namespace game {
         brickRows = rows;
     }
     
-    std::vector<Brick*> BrickField::getBricks() {
-        return bricks;
-    }
-    
-    int BrickField::getBrickRows() {
-        return brickRows;
-    }
-    
     void BrickField::add(Brick* brick) {
         bricks.push_back(brick);
     }
+    
+    /*
+    void BrickField::remove(Brick* brick) {
+        list<Brick*>::iterator pos = find(bricks.begin(), bricks.end(), brick);
+    }*/
     
     BrickField::~BrickField() {
         
