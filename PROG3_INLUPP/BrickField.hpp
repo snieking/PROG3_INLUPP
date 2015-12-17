@@ -10,6 +10,7 @@ namespace game {
     public:
         std::vector<Brick*> getBricks() { return bricks; }
         void add(Brick* brick);
+        void remove(Brick* brick);
         BrickField(int rows);
         int getBrickRows() { return brickRows; }
         ~BrickField();

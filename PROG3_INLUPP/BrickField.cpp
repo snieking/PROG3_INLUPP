@@ -1,6 +1,7 @@
 #include "BrickField.hpp"
 #include <vector>
 #include <algorithm>
+#include <iostream>
 
 namespace game {
     
@@ -12,10 +13,13 @@ namespace game {
         bricks.push_back(brick);
     }
     
-    /*
+    
     void BrickField::remove(Brick* brick) {
-        list<Brick*>::iterator pos = find(bricks.begin(), bricks.end(), brick);
-    }*/
+        auto pos = find(bricks.begin(), bricks.end(), brick);
+        std::cout << "Innan: " << bricks.size() << std::endl;
+        bricks.erase(pos);
+        std::cout << "Efter: " << bricks.size() << std::endl;
+    }
     
     BrickField::~BrickField() {
         

@@ -29,6 +29,14 @@ namespace game {
         sprites.push_back(sprite);
     }
     
+    void GameEngine::remove(Sprite *sprite) {
+        auto pos = find(sprites.begin(), sprites.end(), sprite);
+        std::cout << "Innan sprites: " << sprites.size() << std::endl;
+        sprites.erase(pos);
+        delete sprite;
+        std::cout << "Efter sprites: " << sprites.size() << std::endl;
+    }
+    
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
         paddle = thePaddle;
     }
@@ -161,6 +169,9 @@ namespace game {
                         }
                         else if(brick->getY() + brick->getHeight() == ball->getY()) {
                             ball->goingUp = false;
+                            brickField->remove(brick);
+                            std::cout << "tar bort" << std::endl;
+                            remove(brick);
                             //std::cout << "Underkanten" << std::endl;
                         }
                         else if((brick->getY() == ball->getY() + ball->getHeight())) {
@@ -470,6 +481,10 @@ namespace game {
         if(newGameInitialized) {
             for(Brick* brick : brickField->getBricks())
                 delete brick;
+            
+            for(Sprite* sprite : sprites)
+                delete sprite;
+            
             delete paddle;
             delete ball;
             delete brickField;
