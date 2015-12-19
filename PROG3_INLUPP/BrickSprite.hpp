@@ -11,6 +11,9 @@ namespace game {
     public:
         virtual void draw() = 0;
         int getPoints() { return points; }
+        virtual int getDurability() = 0;
+        virtual void minusDurability() = 0;
+        virtual void setHit() = 0;
         bool intersectsWith(Ball* ball);
         ~BrickSprite();
     protected:

@@ -196,8 +196,12 @@ namespace game {
                             ball->goingUp = true;
                             //std::cout << "Överkanten" << std::endl;
                         }
-                        brickField->remove(brick);
-                        remove(brick);
+                        brick->minusDurability();
+                        brick->setHit();
+                        if(brick->getDurability() < 1) {
+                            brickField->remove(brick);
+                            remove(brick);
+                        }
                     }
             }
             
