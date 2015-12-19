@@ -209,24 +209,38 @@ namespace game {
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() > paddle->getY()-10 && paddle->getY()+10 > ball->getY()) {
-                // -10 så att den träffar på vänstersida
+                // -10 så att den träffar paddeln
                 if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() < paddle->getX()+paddle->getWidth()+ball->getWidth()) {
                     ball->goingUp = true;
-                    if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() <= paddle->getX()+ball->getWidth()) {
+                    if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*2) {
                         ball->goingLeft = true;
+                        std::cout << "1st going Left" << std::endl;
+                        ballX = 3;
+                    }
+                    else if(paddle->getX()+((paddle->getWidth()/2)/7)*2 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*4) {
+                        ball->goingLeft = true;
+                        std::cout << "2nd going Left" << std::endl;
                         ballX = 2;
                     }
-                    else if(paddle->getX()+ball->getWidth() <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)) {
+                    else if(paddle->getX()+((paddle->getWidth()/2)/7)*4 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*7) {
                         ball->goingLeft = true;
+                        std::cout << "3rd going Left" << std::endl;
                         ballX = 1;
                     }
-                    else if(paddle->getX()+(paddle->getWidth()/2) <= ball->getX() && ball->getX() <= paddle->getX()+(paddle->getWidth()/2)+ball->getWidth()) {
+                    else if(paddle->getX()+(paddle->getWidth()/2) <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*3) {
                         ball->goingLeft = false;
+                        std::cout << "1st going Right" << std::endl;
                         ballX = 1;
                     }
-                    else {
+                    else if(paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*3 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*5) {
                         ball->goingLeft = false;
+                        std::cout << "2nd going Right" << std::endl;
                         ballX = 2;
+                    }
+                    else if(paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*5 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*7) {
+                        ball->goingLeft = false;
+                        std::cout << "3rd going Right" << std::endl;
+                        ballX = 3;
                     }
                 }
             }
@@ -285,7 +299,6 @@ namespace game {
         std::multimap<int, std::string>::iterator it = scores.begin();
         if(scores.size() > 0) {
             scoreOne = "1: " + std::to_string(it->first) + " => " + it->second;
-            std::cout << scoreOne << std::endl;
             it++;
         }
         if(scores.size() > 1) {
@@ -303,7 +316,6 @@ namespace game {
         }
         if(scores.size() > 4) {
             scoreFive = "5: " + std::to_string(it->first) + " => " + it->second;
-            it++;
         }
         
         

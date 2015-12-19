@@ -101,7 +101,7 @@ int main(int argc, const char * argv[]) {
         
         while(gameOn){
             ge->getSprites().clear();
-            Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 125, 10);
+            Sprite* s1 = PlayerSprite::getInstance(ge, 350, 589, 140, 10);
             ge->setPaddle(dynamic_cast<PlayerSprite*>(s1));
             Sprite* s2 = Ball::getInstance(ge, 400, s1->getY()-20, 20, 20);
             ge->setBall(dynamic_cast<Ball*>(s2));
