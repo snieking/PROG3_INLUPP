@@ -9,6 +9,7 @@
 #include <SDL2_ttf/SDL_ttf.h>
 
 #include <iostream>
+#include <ctime>
 
 namespace game {
 
@@ -31,10 +32,7 @@ namespace game {
     
     void GameEngine::remove(Sprite *sprite) {
         auto pos = find(sprites.begin(), sprites.end(), sprite);
-        std::cout << "Innan sprites: " << sprites.size() << std::endl;
         sprites.erase(pos);
-        delete sprite;
-        std::cout << "Efter sprites: " << sprites.size() << std::endl;
     }
     
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
@@ -112,6 +110,8 @@ namespace game {
         return false;
     } // mainMenu
     
+  
+    
     bool GameEngine::newGame() {
         // Removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
@@ -120,16 +120,21 @@ namespace game {
 
         int x = 0;
         int ballY = 1, ballX = 0;
-        //SDL_RenderClear(ren);
-        //SDL_RenderPresent(ren);
+        int varv = 0;
+        
+        
+
         for (Sprite* s : sprites)
             s->draw();
         
         ball->goingLeft = true;
         SDL_RenderPresent(ren);
+        Uint32 startTime = SDL_GetTicks();
+        
         bool goOn = true;
         while (goOn) {
-            Uint32 start = SDL_GetTicks() + FPS;
+            Uint32 elapsedMS = SDL_GetTicks() - startTime;
+            Uint32 start = SDL_GetTicks() + timePerFrame;
             SDL_Event eve;
             while (SDL_PollEvent(&eve)) {
                 switch (eve.type) {
@@ -148,16 +153,33 @@ namespace game {
                 } // switch
             } // inre while
             
+            // FPS Counter
+            if (varv % 10 == 0) {
+                double elapsedSeconds = elapsedMS / 1000.0;
+                double averageFps = varv / elapsedSeconds;
+                std::string varvStr = std::to_string(averageFps);
+                SDL_Surface* varvSurf = TTF_RenderText_Solid(f, varvStr.c_str(), textColor);
+                if (varvText != nullptr)
+                    SDL_DestroyTexture(varvText);
+                varvText = SDL_CreateTextureFromSurface(ren, varvSurf);
+                varvRect.w = 75;
+                varvRect.h = 25;
+                varvRect.x = 400;
+                varvRect.y = 0;
+                SDL_FreeSurface(varvSurf);
+                
+            }
+            
+            varv++;
             
             // Ifall bollen träffar taket så går den inte upp längre
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
-            for(Brick* brick: brickField->getBricks()) {
-                if(!brick->hit)
+            for(BrickSprite* brick: brickField->getBricks()) {
                     if(brick->intersectsWith(ball)) {
-                        brick->hit = true;
-                        totalPoints += brick->points;
+                        //brick->hit = true;
+                        totalPoints += brick->getPoints();
                         //std::cout << "Tog just bort en" << std::endl;
                         if((brick->getX() + brick->getWidth() == ball->getX())) {
                             //std::cout << "Högerkanten" << std::endl;
@@ -169,15 +191,13 @@ namespace game {
                         }
                         else if(brick->getY() + brick->getHeight() == ball->getY()) {
                             ball->goingUp = false;
-                            brickField->remove(brick);
-                            std::cout << "tar bort" << std::endl;
-                            remove(brick);
-                            //std::cout << "Underkanten" << std::endl;
                         }
                         else if((brick->getY() == ball->getY() + ball->getHeight())) {
                             ball->goingUp = true;
                             //std::cout << "Överkanten" << std::endl;
                         }
+                        brickField->remove(brick);
+                        remove(brick);
                     }
             }
             
@@ -218,9 +238,8 @@ namespace game {
             
             // Kollar om man vunnit
             int bricksLeft = 0;
-            for(Brick* brick : brickField->getBricks()) {
-                if(!brick->hit)
-                    bricksLeft++;
+            for(BrickSprite* brick : brickField->getBricks()) {
+                bricksLeft++;
             }
             if(bricksLeft == 0) {
                 return true;
@@ -242,14 +261,14 @@ namespace game {
             rubrText = SDL_CreateTextureFromSurface(ren, rubrSurf);
             SDL_FreeSurface(rubrSurf);
             rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 50 };
+            
+            SDL_RenderCopy(ren, varvText, NULL, &varvRect);
 
             SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
             
             SDL_DestroyTexture(rubrText);
             
             SDL_RenderPresent(ren);
-            
-            //std::cout << SDL_TICKS_PASSED(SDL_GetTicks(), start) << std::endl;
             
             if(!SDL_TICKS_PASSED(SDL_GetTicks(), start))
                 SDL_Delay(start - SDL_GetTicks());
@@ -347,6 +366,8 @@ namespace game {
             SDL_RenderCopy(ren, menuTexture, NULL, &menuRect);
             
             SDL_RenderPresent(ren);
+            
+            
             
         } // outer-while
         
@@ -449,6 +470,8 @@ namespace game {
             SDL_DestroyTexture(nameInputTexture);
             SDL_RenderPresent(ren);
             
+
+            
         } // outer-while
         
         SDL_StopTextInput();
@@ -473,22 +496,20 @@ namespace game {
     }
 
     GameEngine::~GameEngine() {
-        SDL_DestroyRenderer(ren);
-        SDL_DestroyWindow(win);
-        if(f != NULL)
-            delete f;
+        
         
         if(newGameInitialized) {
-            for(Brick* brick : brickField->getBricks())
-                delete brick;
-            
-            for(Sprite* sprite : sprites)
-                delete sprite;
-            
-            delete paddle;
-            delete ball;
+            std::for_each(sprites.begin(), sprites.end(), [](Sprite* sprite) {
+                if(sprite != nullptr)
+                    delete sprite;
+            });
             delete brickField;
         }
+        
+        SDL_DestroyRenderer(ren);
+        SDL_DestroyWindow(win);
+        
+        delete f;
         
         if(gameOverInitialized) {
             SDL_DestroyTexture(rubrText);
@@ -496,6 +517,7 @@ namespace game {
         
         SDL_DestroyTexture(createdByText);
         TTF_Quit();
+        SDL_Quit();
     }
 
 }

@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5D1769E21C11AFF0007A6533 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D1769E11C11AFF0007A6533 /* main.cpp */; };
+		5D70C0C41C259A7800CC93C6 /* MovingSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0C21C259A7800CC93C6 /* MovingSprite.cpp */; };
+		5D70C0C71C25A00E00CC93C6 /* BrickSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0C51C25A00E00CC93C6 /* BrickSprite.cpp */; };
+		5D70C0CA1C25A53C00CC93C6 /* BrownBrick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0C81C25A53C00CC93C6 /* BrownBrick.cpp */; };
+		5D70C0CD1C25B26F00CC93C6 /* PurpleBrick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0CB1C25B26F00CC93C6 /* PurpleBrick.cpp */; };
+		5D70C0D01C25B32100CC93C6 /* GoldBrick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D70C0CE1C25B32100CC93C6 /* GoldBrick.cpp */; };
 		5D82BF151C11BB3300754B44 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D82BF111C11BB3300754B44 /* SDL2_image.framework */; };
 		5D82BF161C11BB3300754B44 /* SDL2_mixer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D82BF121C11BB3300754B44 /* SDL2_mixer.framework */; };
 		5D82BF171C11BB3300754B44 /* SDL2_ttf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D82BF131C11BB3300754B44 /* SDL2_ttf.framework */; };
@@ -16,7 +21,7 @@
 		5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1C1C11C08000754B44 /* Sprite.cpp */; };
 		5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D82BF1F1C11C0D500754B44 /* PlayerSprite.cpp */; };
 		5D9A3BC81C19661900550046 /* BrickField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A3BC61C19661900550046 /* BrickField.cpp */; };
-		5D9A3BCB1C1967C900550046 /* Brick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A3BC91C1967C900550046 /* Brick.cpp */; };
+		5D9A3BCB1C1967C900550046 /* BlueBrick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D9A3BC91C1967C900550046 /* BlueBrick.cpp */; };
 		5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5DC39AA41C18BAEF00098BFD /* Ball.cpp */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +42,16 @@
 		5D1769F01C11B6EE007A6533 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		5D2BEB7C1C1CE126000B586C /* PROG3_INLUPP */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PROG3_INLUPP; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D6346A01C17957A006596EB /* paddle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paddle.png; sourceTree = "<group>"; };
+		5D70C0C21C259A7800CC93C6 /* MovingSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MovingSprite.cpp; sourceTree = "<group>"; };
+		5D70C0C31C259A7800CC93C6 /* MovingSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MovingSprite.hpp; sourceTree = "<group>"; };
+		5D70C0C51C25A00E00CC93C6 /* BrickSprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrickSprite.cpp; sourceTree = "<group>"; };
+		5D70C0C61C25A00E00CC93C6 /* BrickSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BrickSprite.hpp; sourceTree = "<group>"; };
+		5D70C0C81C25A53C00CC93C6 /* BrownBrick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrownBrick.cpp; sourceTree = "<group>"; };
+		5D70C0C91C25A53C00CC93C6 /* BrownBrick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BrownBrick.hpp; sourceTree = "<group>"; };
+		5D70C0CB1C25B26F00CC93C6 /* PurpleBrick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PurpleBrick.cpp; sourceTree = "<group>"; };
+		5D70C0CC1C25B26F00CC93C6 /* PurpleBrick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = PurpleBrick.hpp; sourceTree = "<group>"; };
+		5D70C0CE1C25B32100CC93C6 /* GoldBrick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoldBrick.cpp; sourceTree = "<group>"; };
+		5D70C0CF1C25B32100CC93C6 /* GoldBrick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GoldBrick.hpp; sourceTree = "<group>"; };
 		5D82BF111C11BB3300754B44 /* SDL2_image.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_image.framework; path = ../../../../../Library/Frameworks/SDL2_image.framework; sourceTree = "<group>"; };
 		5D82BF121C11BB3300754B44 /* SDL2_mixer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_mixer.framework; path = ../../../../../Library/Frameworks/SDL2_mixer.framework; sourceTree = "<group>"; };
 		5D82BF131C11BB3300754B44 /* SDL2_ttf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2_ttf.framework; path = ../../../../../Library/Frameworks/SDL2_ttf.framework; sourceTree = "<group>"; };
@@ -49,8 +64,8 @@
 		5D82BF201C11C0D500754B44 /* PlayerSprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PlayerSprite.hpp; path = ../PlayerSprite.hpp; sourceTree = "<group>"; };
 		5D9A3BC61C19661900550046 /* BrickField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BrickField.cpp; sourceTree = "<group>"; };
 		5D9A3BC71C19661900550046 /* BrickField.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BrickField.hpp; sourceTree = "<group>"; };
-		5D9A3BC91C1967C900550046 /* Brick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Brick.cpp; sourceTree = "<group>"; };
-		5D9A3BCA1C1967C900550046 /* Brick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Brick.hpp; sourceTree = "<group>"; };
+		5D9A3BC91C1967C900550046 /* BlueBrick.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BlueBrick.cpp; sourceTree = "<group>"; };
+		5D9A3BCA1C1967C900550046 /* BlueBrick.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BlueBrick.hpp; sourceTree = "<group>"; };
 		5DC39AA41C18BAEF00098BFD /* Ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Ball.cpp; sourceTree = "<group>"; };
 		5DC39AA51C18BAEF00098BFD /* Ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Ball.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -88,11 +103,21 @@
 			children = (
 				5DC39AA41C18BAEF00098BFD /* Ball.cpp */,
 				5DC39AA51C18BAEF00098BFD /* Ball.hpp */,
-				5D9A3BC91C1967C900550046 /* Brick.cpp */,
-				5D9A3BCA1C1967C900550046 /* Brick.hpp */,
+				5D9A3BC91C1967C900550046 /* BlueBrick.cpp */,
+				5D9A3BCA1C1967C900550046 /* BlueBrick.hpp */,
+				5D70C0C81C25A53C00CC93C6 /* BrownBrick.cpp */,
+				5D70C0C91C25A53C00CC93C6 /* BrownBrick.hpp */,
+				5D70C0CB1C25B26F00CC93C6 /* PurpleBrick.cpp */,
+				5D70C0CC1C25B26F00CC93C6 /* PurpleBrick.hpp */,
+				5D70C0CE1C25B32100CC93C6 /* GoldBrick.cpp */,
+				5D70C0CF1C25B32100CC93C6 /* GoldBrick.hpp */,
+				5D70C0C51C25A00E00CC93C6 /* BrickSprite.cpp */,
+				5D70C0C61C25A00E00CC93C6 /* BrickSprite.hpp */,
 				5D9A3BC61C19661900550046 /* BrickField.cpp */,
 				5D9A3BC71C19661900550046 /* BrickField.hpp */,
 				5D1769E11C11AFF0007A6533 /* main.cpp */,
+				5D70C0C21C259A7800CC93C6 /* MovingSprite.cpp */,
+				5D70C0C31C259A7800CC93C6 /* MovingSprite.hpp */,
 				5D82BF191C11C02800754B44 /* GameEngine.cpp */,
 				5D82BF1A1C11C02800754B44 /* GameEngine.hpp */,
 				5D82BF1C1C11C08000754B44 /* Sprite.cpp */,
@@ -168,13 +193,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D70C0C41C259A7800CC93C6 /* MovingSprite.cpp in Sources */,
 				5DC39AA61C18BAEF00098BFD /* Ball.cpp in Sources */,
+				5D70C0C71C25A00E00CC93C6 /* BrickSprite.cpp in Sources */,
 				5D82BF211C11C0D500754B44 /* PlayerSprite.cpp in Sources */,
 				5D9A3BC81C19661900550046 /* BrickField.cpp in Sources */,
+				5D70C0CD1C25B26F00CC93C6 /* PurpleBrick.cpp in Sources */,
 				5D1769E21C11AFF0007A6533 /* main.cpp in Sources */,
 				5D82BF1B1C11C02800754B44 /* GameEngine.cpp in Sources */,
-				5D9A3BCB1C1967C900550046 /* Brick.cpp in Sources */,
+				5D9A3BCB1C1967C900550046 /* BlueBrick.cpp in Sources */,
+				5D70C0CA1C25A53C00CC93C6 /* BrownBrick.cpp in Sources */,
 				5D82BF1E1C11C08000754B44 /* Sprite.cpp in Sources */,
+				5D70C0D01C25B32100CC93C6 /* GoldBrick.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

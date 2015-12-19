@@ -2,7 +2,12 @@
 #include "PlayerSprite.hpp"
 #include "Sprite.hpp"
 #include "Ball.hpp"
-#include "LoseScreen.hpp"
+#include "BrickSprite.hpp"
+#include "BlueBrick.hpp"
+#include "BrownBrick.hpp"
+#include "PurpleBrick.hpp"
+#include "GoldBrick.hpp"
+
 
 #include <stdexcept>
 #include <iostream>
@@ -26,7 +31,7 @@ bool freshGame(GameEngine* ge) {
     /* Random since c++11 */
     random_device rd;
     mt19937 rng(rd());
-    uniform_int_distribution<int> uni(0,5);
+    uniform_int_distribution<int> uni(0,6);
     int random = 0;
     
     for(int y = 0; y < level; y++) {
@@ -34,34 +39,39 @@ bool freshGame(GameEngine* ge) {
             random = uni(rng);
             switch(random) {
                 case 0: {
-                    Sprite* blue = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(blue));
+                    Sprite* blue = BlueBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 10);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(blue));
                     break;
                 }
                 case 1: {
-                    Sprite* green = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(green));
+                    Sprite* blue = BlueBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 10);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(blue));
                     break;
                 }
                 case 2: {
-                    Sprite* red = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(red));
+                    Sprite* blue = BlueBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 10);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(blue));
                     break;
                 }
 
                 case 3: {
-                    Sprite* blue = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(blue));
+                    Sprite* brown = BrownBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 25);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(brown));
                     break;
                 }
                 case 4: {
-                    Sprite* green = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(green));
+                    Sprite* brown = BrownBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 25);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(brown));
                     break;
                 }
                 case 5: {
-                    Sprite* red = Brick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, random);
-                    ge->getBrickField()->add(dynamic_cast<Brick*>(red));
+                    Sprite* purple = PurpleBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 60);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(purple));
+                    break;
+                }
+                case 6: {
+                    Sprite* gold = GoldBrick::getInstance(ge, xVal, yVal, BRICKWIDTH, BRICKHEIGHT, 100);
+                    ge->getBrickField()->add(dynamic_cast<BrickSprite*>(gold));
                     break;
                 }
             }
@@ -97,6 +107,7 @@ int main(int argc, const char * argv[]) {
             ge->setBall(dynamic_cast<Ball*>(s2));
             BrickField* brickField = new BrickField(9);
             ge->setBrickField(brickField);
+            
             ge->totalPoints = points;
             
             if(!(freshGame(ge)))
@@ -106,6 +117,16 @@ int main(int argc, const char * argv[]) {
                     if(!ge->mainMenu())
                         gameOn = false;
                 }
+            
+            for(auto cpos = brickField->getBricks().begin(); cpos != brickField->getBricks().end(); cpos++) {
+                auto spos = find(ge->getSprites().begin(), ge->getSprites().end(), *cpos);
+                ge->getSprites().erase(spos);
+                delete *spos;
+                *spos = nullptr;
+                
+            }
+
+            ge->getBrickField()->getBricks().clear();
             
         }
         

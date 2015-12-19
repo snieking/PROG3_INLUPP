@@ -9,16 +9,19 @@ namespace game {
         brickRows = rows;
     }
     
-    void BrickField::add(Brick* brick) {
+    void BrickField::add(BrickSprite* brick) {
         bricks.push_back(brick);
     }
     
     
-    void BrickField::remove(Brick* brick) {
+    void BrickField::remove(BrickSprite* brick) {
         auto pos = find(bricks.begin(), bricks.end(), brick);
-        std::cout << "Innan: " << bricks.size() << std::endl;
         bricks.erase(pos);
-        std::cout << "Efter: " << bricks.size() << std::endl;
+    }
+    
+    
+    void BrickField::clearAll() {
+        
     }
     
     BrickField::~BrickField() {

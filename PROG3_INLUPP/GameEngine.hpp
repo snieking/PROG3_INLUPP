@@ -42,7 +42,7 @@ private:
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
-    const int FPS = 0;
+    const int timePerFrame = 1;
     int WIDTH, HEIGHT;
     SDL_Color textColor;
     TTF_Font* f;
@@ -60,6 +60,8 @@ private:
     
     /* new Game */
     bool newGameInitialized = false;
+    SDL_Texture* varvText;
+    SDL_Rect varvRect;
     
     /* game Over */
     bool gameOverInitialized = false;

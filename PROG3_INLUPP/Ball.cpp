@@ -1,5 +1,5 @@
 #include "Ball.hpp"
-#include "Sprite.hpp"
+#include "MovingSprite.hpp"
 #include "GameEngine.hpp"
 
 #include <SDL2/SDL.h>
@@ -13,9 +13,8 @@ namespace game {
         return new Ball(ge, x, y, w, h);
     }
     
-    Ball::Ball(GameEngine* ge, int x, int y, int w, int h) : Sprite(ge, x, y, w, h) {
-        bWidth = w;
-        bHeight = h;
+    Ball::Ball(GameEngine* ge, int x, int y, int w, int h) : MovingSprite(ge, x, y, w, h) {
+
         
         SDL_Surface* surf = IMG_Load("/Users/viktorplane/Documents/git/PROG3_INLUPP/ball.png");
         if(surf == NULL)

@@ -2,15 +2,16 @@
 #define BrickField_hpp
 
 #include "Sprite.hpp"
-#include "Brick.hpp"
+#include "BrickSprite.hpp"
 #include <vector>
 
 namespace game {
     class BrickField {
     public:
-        std::vector<Brick*> getBricks() { return bricks; }
-        void add(Brick* brick);
-        void remove(Brick* brick);
+        std::vector<BrickSprite*>& getBricks() { return bricks; }
+        void add(BrickSprite* brick);
+        void remove(BrickSprite* brick);
+        void clearAll();
         BrickField(int rows);
         int getBrickRows() { return brickRows; }
         ~BrickField();
@@ -18,7 +19,7 @@ namespace game {
         int brickRows;
         BrickField(const BrickField&) = delete;
         const BrickField& operator=(const BrickField&) = delete;
-        std::vector<Brick*> bricks;
+        std::vector<BrickSprite*> bricks;
     };
 }
 

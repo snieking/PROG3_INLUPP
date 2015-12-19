@@ -15,9 +15,8 @@ namespace game {
         return new PlayerSprite(ge, x, y, w, h);
     }
     
-    PlayerSprite::PlayerSprite(GameEngine* ge, int x, int y, int w, int h) : Sprite(ge, x, y, w, h) {
-        pWidth = w;
-        pHeight = h;
+    PlayerSprite::PlayerSprite(GameEngine* ge, int x, int y, int w, int h) : MovingSprite(ge, x, y, w, h) {
+
         
         SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/greenpaddle.png");
         if(surf == NULL)
