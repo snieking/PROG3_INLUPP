@@ -49,7 +49,7 @@ namespace game {
         functions.insert({c, mpf});
         std::cout << functions.size() << std::endl;
         
-        mfunk npf = &GameEngine::newGame;
+        //mfunk npf = &GameEngine::newGame;
         
         //(ge->*mpf)();
     }
@@ -259,7 +259,7 @@ namespace game {
                 ball->goingLeft = true;
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
-            if(ball->getY() > paddle->getY()-10 && paddle->getY()+10 > ball->getY()) {
+            if(ball->getY() > paddle->getY()-ball->getHeight() && paddle->getY()+ball->getHeight() > ball->getY()) {
                 // -10 så att den träffar paddeln
                 if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() < paddle->getX()+paddle->getWidth()+ball->getWidth()) {
                     ball->goingUp = true;
