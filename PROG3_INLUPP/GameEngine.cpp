@@ -35,6 +35,25 @@ namespace game {
         sprites.erase(pos);
     }
     
+    void GameEngine::addHighScoreShortcut(char c) {
+        //functions.insert(std::pair<char, bool(*)>(c, function));
+        //typedef void (*pfunc)();
+        //void (GameEngine::*mfunk) ();
+        //pfunc f = GameEngine::highScore;
+        //functions.insert(std::make_pair('1', mfunk()));
+        //functionVector.push_back(function);
+        
+        
+        mfunk mpf = &GameEngine::highScore;
+        
+        functions.insert({c, mpf});
+        std::cout << functions.size() << std::endl;
+        
+        mfunk npf = &GameEngine::newGame;
+        
+        //(ge->*mpf)();
+    }
+    
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
         paddle = thePaddle;
     }
@@ -91,12 +110,40 @@ namespace game {
                         goOn = false; break;
                     case SDL_MOUSEBUTTONDOWN:
                         if (eve.button.x >= newGameX && eve.button.x <= newGameX+newGameW && eve.button.y >= newGameY && eve.button.y <= newGameY+newGameH) {
-                            return true;
+                            return true; // Can be changed to call newGame function instead
                             break;
                         }
                         if (eve.button.x >= highscoreX && eve.button.x <= highscoreX+highscoreW && eve.button.y >= highscoreY && eve.button.y <= highscoreY+highscoreH) {
                             highScore();
+                            break;
                         }
+                    case SDL_KEYDOWN:
+                        //char a = eve.key.keysym.sym;
+                        //mfunk f = functions[a];
+                        //*f;
+                        
+                        std::map<char, mfunk>::iterator iter;
+                        mfunk m = nullptr;
+                        
+                        for (iter = functions.begin(); iter != functions.end(); ++iter) {
+                            if (iter->first == eve.key.keysym.sym) {
+                                std::cout << "Det stämde!" << std::endl;
+                                m = iter->second;
+                                (this->*m)();
+                            }
+                        }
+                        
+                        
+                        /*
+                        std::map<char, mfunk>::iterator result = functions.find('c');
+                        if(result != functions.end()) {
+                            auto mem = result->second;
+                            (this->*mem)();
+                        }*/
+                        
+                        //func();
+                        //if(eve.key.keysym.sym == SDLK_BACKSPACE
+                        
                         
                 } // switch
             } // inner-while

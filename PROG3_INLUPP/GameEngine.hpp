@@ -13,7 +13,7 @@
 
 
 namespace game {
-
+typedef void (GameEngine::*mfunk)();
 class Sprite;
 
 class GameEngine {
@@ -22,6 +22,7 @@ public:
     void add(Sprite* sprite);
     void remove(Sprite* sprite);
     std::list<Sprite*>& getSprites() { return sprites; }
+    void addHighScoreShortcut(char c);
     SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
     bool run();
     bool mainMenu();
@@ -39,6 +40,8 @@ private:
     SDL_Window* win;
     SDL_Renderer* ren;
     std::list<Sprite*> sprites;
+    
+    std::map<char, mfunk> functions;
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;

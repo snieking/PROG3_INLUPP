@@ -92,9 +92,17 @@ bool freshGame(GameEngine* ge) {
 
 }
 
+
+
 int main(int argc, const char * argv[]) {
     try {
         GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+        ge->addHighScoreShortcut('1');
+        
+        
+        
+        //ge->addFunction('1', mfunk);
+        
         bool gameOn = true;
         if(!(ge->mainMenu()))
             gameOn = false;
