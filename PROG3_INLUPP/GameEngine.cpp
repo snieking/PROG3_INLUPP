@@ -47,7 +47,6 @@ namespace game {
         mfunk mpf = &GameEngine::highScore;
         
         functions.insert({c, mpf});
-        std::cout << functions.size() << std::endl;
         
         //mfunk npf = &GameEngine::newGame;
         
@@ -94,7 +93,7 @@ namespace game {
         SDL_Rect highscoreRect = { highscoreX, highscoreY, highscoreW, highscoreH };
         
         // Created by text
-        std::string createdBy = "Viktor Plane and Olof Hofstedt (PROG3 2015/16)";
+        std::string createdBy = "Viktor Plane and Olof Hofstedt (PROG3 2015-16)";
         SDL_Surface* createdBySurf = TTF_RenderText_Solid(f, createdBy.c_str(), textColor);
         createdByText = SDL_CreateTextureFromSurface(ren, createdBySurf);
         SDL_FreeSurface(createdBySurf);
@@ -204,15 +203,16 @@ namespace game {
             if (varv % 10 == 0) {
                 double elapsedSeconds = elapsedMS / 1000.0;
                 double averageFps = varv / elapsedSeconds;
-                std::string varvStr = std::to_string(averageFps);
+                int averageIntFps = averageFps;
+                std::string varvStr = "FPS: " + std::to_string(averageIntFps);
                 SDL_Surface* varvSurf = TTF_RenderText_Solid(f, varvStr.c_str(), textColor);
-                if (varvText != nullptr)
+                if (varvText != nullptr && varv != 0)
                     SDL_DestroyTexture(varvText);
                 varvText = SDL_CreateTextureFromSurface(ren, varvSurf);
                 varvRect.w = 75;
                 varvRect.h = 25;
-                varvRect.x = 400;
-                varvRect.y = 0;
+                varvRect.x = WIDTH-varvRect.w-10;
+                varvRect.y = 10;
                 SDL_FreeSurface(varvSurf);
                 
             }
@@ -226,7 +226,7 @@ namespace game {
             for(BrickSprite* brick: brickField->getBricks()) {
                     if(brick->intersectsWith(ball)) {
                         //brick->hit = true;
-                        totalPoints += brick->getPoints();
+                        
                         //std::cout << "Tog just bort en" << std::endl;
                         if((brick->getX() + brick->getWidth() == ball->getX())) {
                             //std::cout << "Högerkanten" << std::endl;
@@ -246,6 +246,7 @@ namespace game {
                         brick->minusDurability();
                         brick->setHit();
                         if(brick->getDurability() < 1) {
+                            totalPoints += brick->getPoints();
                             brickField->remove(brick);
                             remove(brick);
                         }
@@ -260,37 +261,30 @@ namespace game {
             
             // Bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() > paddle->getY()-ball->getHeight() && paddle->getY()+ball->getHeight() > ball->getY()) {
-                // -10 så att den träffar paddeln
                 if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() < paddle->getX()+paddle->getWidth()+ball->getWidth()) {
                     ball->goingUp = true;
                     if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*2) {
                         ball->goingLeft = true;
-                        std::cout << "1st going Left" << std::endl;
                         ballX = 3;
                     }
                     else if(paddle->getX()+((paddle->getWidth()/2)/7)*2 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*4) {
                         ball->goingLeft = true;
-                        std::cout << "2nd going Left" << std::endl;
                         ballX = 2;
                     }
                     else if(paddle->getX()+((paddle->getWidth()/2)/7)*4 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+((paddle->getWidth()/2)/7)*7) {
                         ball->goingLeft = true;
-                        std::cout << "3rd going Left" << std::endl;
                         ballX = 1;
                     }
                     else if(paddle->getX()+(paddle->getWidth()/2) <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*3) {
                         ball->goingLeft = false;
-                        std::cout << "1st going Right" << std::endl;
                         ballX = 1;
                     }
                     else if(paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*3 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*5) {
                         ball->goingLeft = false;
-                        std::cout << "2nd going Right" << std::endl;
                         ballX = 2;
                     }
                     else if(paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*5 <= ball->getX()+(ball->getWidth()/2) && ball->getX()+(ball->getWidth()/2) <= paddle->getX()+(paddle->getWidth()/2)+((paddle->getWidth()/2)/7)*7) {
                         ball->goingLeft = false;
-                        std::cout << "3rd going Right" << std::endl;
                         ballX = 3;
                     }
                 }
@@ -319,16 +313,15 @@ namespace game {
             for (Sprite* s : sprites)
                 s->draw();
             
-            std::string printpoints = "Score: " + std::to_string(totalPoints);
+            std::string printpoints = "SCORE: " + std::to_string(totalPoints);
             
             SDL_Surface* rubrSurf = TTF_RenderText_Solid(f, printpoints.c_str(), textColor);
             
             rubrText = SDL_CreateTextureFromSurface(ren, rubrSurf);
             SDL_FreeSurface(rubrSurf);
-            rubrRect = { WIDTH-WIDTH, HEIGHT-HEIGHT, 75, 50 };
+            rubrRect = { WIDTH-WIDTH+10, HEIGHT-HEIGHT+10, 75, 25 };
             
             SDL_RenderCopy(ren, varvText, NULL, &varvRect);
-
             SDL_RenderCopy(ren, rubrText, NULL, &rubrRect);
             
             SDL_DestroyTexture(rubrText);
@@ -567,6 +560,9 @@ namespace game {
                     delete sprite;
             });
             delete brickField;
+            
+            if (varvText != nullptr)
+                SDL_DestroyTexture(varvText);
         }
         
         SDL_DestroyRenderer(ren);

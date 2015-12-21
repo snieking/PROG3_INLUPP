@@ -45,7 +45,7 @@ private:
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
-    const int timePerFrame = 5;
+    const int timePerFrame = 0;
     int WIDTH, HEIGHT;
     SDL_Color textColor;
     TTF_Font* f;
