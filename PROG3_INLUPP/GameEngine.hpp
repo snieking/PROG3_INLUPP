@@ -27,6 +27,7 @@ public:
     void addNewGameShortcut(char c, ScriptFunction);
     SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
     std::string getDifficulty() { return std::to_string(timePerFrame); }
+    void setBackgroundPath(std::string s) { backgroundPath = s; }
     void plusDifficulty();
     void minusDifficulty() { timePerFrame++; }
     bool run();
@@ -42,38 +43,43 @@ public:
     ~GameEngine();
 private:
     friend class Sprite;
+    
+    /* Global */
     SDL_Window* win;
     SDL_Renderer* ren;
     std::list<Sprite*> sprites;
     std::map<char, mfunk> functions;
     std::map<char, ScriptFunction> funcs;
+    
+    int timePerFrame = 3;
+    int WIDTH, HEIGHT;
+    std::string backgroundPath;
+    SDL_Texture* backgroundTexture;
+    SDL_Color textColor;
+    TTF_Font* f;
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
-    int timePerFrame = 3;
-    int WIDTH, HEIGHT;
-    SDL_Color textColor;
-    TTF_Font* f;
-    SDL_Rect rubrRect;
-    SDL_Rect createdByRect;
-    SDL_Texture* rubrText;
+    
+    /* Main Menu */
+    SDL_Texture* plusMinusText;
+    SDL_Texture* difficultyText;
     SDL_Texture* createdByText;
     SDL_Texture* newGameTexture;
     SDL_Texture* highscoreTexture;
+    SDL_Rect createdByRect;
     
-    /* main Menu */
-    SDL_Texture* plusMinusText;
-    SDL_Texture* difficultyText;
-    
-    /* high Score */
+    /* Highscore */
     std::multimap<int, std::string, std::greater<int>> scores;
     
-    /* new Game */
+    /* New Game */
     bool newGameInitialized = false;
     SDL_Texture* varvText;
     SDL_Rect varvRect;
+    SDL_Texture* rubrText;
+    SDL_Rect rubrRect;
     
-    /* game Over */
+    /* Game Over */
     bool gameOverInitialized = false;
 };
     

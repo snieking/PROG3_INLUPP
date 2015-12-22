@@ -121,6 +121,13 @@ namespace game {
         SDL_FreeSurface(createdBySurf);
         createdByRect = { WIDTH - (WIDTH/2)-10, HEIGHT-25, WIDTH/2, 20 };
         
+        // Background text
+        if(backgroundPath.length() != 0) {
+            SDL_Surface* backgroundSurf = IMG_Load(backgroundPath.c_str());
+            backgroundTexture = SDL_CreateTextureFromSurface(ren, backgroundSurf);
+            SDL_FreeSurface(backgroundSurf);
+        }
+        
         // goOn
         bool goOn = true;
         while(goOn) {
@@ -187,6 +194,10 @@ namespace game {
             
             SDL_RenderClear(ren);
             
+            //Background image
+            if(backgroundTexture != nullptr)
+                SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
+            
             // Difficulty text
             std::string difficulty = "Handicap: " + getDifficulty();
             SDL_Surface* difficultySurf = TTF_RenderText_Solid(f, difficulty.c_str(), textColor);
@@ -198,6 +209,7 @@ namespace game {
             SDL_RenderCopy(ren, plusMinusText, NULL, &plusMinusRect);
             SDL_RenderCopy(ren, difficultyText, NULL, &difficultyRect);
             SDL_RenderCopy(ren, createdByText, NULL, &createdByRect);
+
             SDL_RenderPresent(ren);
             
             // Destroy texture
@@ -360,6 +372,11 @@ namespace game {
             }
             
             SDL_RenderClear(ren);
+            
+            //Background image
+            if(backgroundTexture != nullptr)
+                SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
+            
             for (Sprite* s : sprites)
                 s->draw();
             
@@ -463,6 +480,10 @@ namespace game {
             } // inner-while
             
             SDL_RenderClear(ren);
+            
+            //Background image
+            if(backgroundTexture != nullptr)
+                SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
             
             SDL_RenderCopy(ren, firstTexture, NULL, &firstRect);
             SDL_RenderCopy(ren, secondTexture, NULL, &secondRect);
@@ -568,6 +589,11 @@ namespace game {
             SDL_Rect nameInputRect = { 210, 300, 200, 50 };
             
             SDL_RenderClear(ren);
+            
+            //Background image
+            if(backgroundTexture != nullptr)
+                SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
+            
             SDL_RenderCopy(ren, scoreTexture, NULL, &scoreRect);
             SDL_RenderCopy(ren, enterNameTexture, NULL, &enterNameRect);
             SDL_RenderCopy(ren, submitTexture, NULL, &submitRect);
@@ -625,6 +651,7 @@ namespace game {
         }
         
         SDL_DestroyTexture(createdByText);
+        SDL_DestroyTexture(backgroundTexture);
         TTF_Quit();
         SDL_Quit();
     }
