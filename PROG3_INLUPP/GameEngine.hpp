@@ -14,7 +14,7 @@
 
 namespace game {
 typedef void (GameEngine::*mfunk)();
-typedef void (*ScriptFunction)(void);
+
 class Sprite;
 
 class GameEngine {
@@ -24,7 +24,7 @@ public:
     void remove(Sprite* sprite);
     std::list<Sprite*>& getSprites() { return sprites; }
     void addShortcut(char c, mfunk f);
-    void addNewGameShortcut(char c, ScriptFunction);
+    void addNShortcut(char c, std::function<void()> nf);
     SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
     std::string getDifficulty() { return std::to_string(timePerFrame); }
     void setBackgroundPath(std::string s) { backgroundPath = s; }
@@ -49,7 +49,7 @@ private:
     SDL_Renderer* ren;
     std::list<Sprite*> sprites;
     std::map<char, mfunk> functions;
-    std::map<char, ScriptFunction> funcs;
+    std::map<char, std::function<void()>> nfuncs;
     
     int timePerFrame = 3;
     int WIDTH, HEIGHT;

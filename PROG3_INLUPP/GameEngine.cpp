@@ -41,25 +41,11 @@ namespace game {
     }
     
     void GameEngine::addShortcut(char c, mfunk f) {
-        //functions.insert(std::pair<char, bool(*)>(c, function));
-        //typedef void (*pfunc)();
-        //void (GameEngine::*mfunk) ();
-        //pfunc f = GameEngine::highScore;
-        //functions.insert(std::make_pair('1', mfunk()));
-        //functionVector.push_back(function);
-        
-        
-        
         functions.insert({c, f});
-        
-        //mfunk npf = &GameEngine::newGame;
-        
-        //(ge->*mpf)();
     }
     
-    void GameEngine::addNewGameShortcut(char c, ScriptFunction npf) {
-        funcs.insert({c, npf});
-        
+    void GameEngine::addNShortcut(char c, std::function<void()> nf) {
+        nfuncs.insert({c, nf});
     }
     
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
@@ -152,43 +138,17 @@ namespace game {
                                 plusDifficulty();
                         }
                     case SDL_KEYDOWN:
-                        //char a = eve.key.keysym.sym;
-                        //mfunk f = functions[a];
-                        //*f;
-                        std::map<char, ScriptFunction>::iterator iterr;
-                        ScriptFunction n = nullptr;
+                        char a = eve.key.keysym.sym;
                         
-                        for (iterr = funcs.begin(); iterr != funcs.end(); ++iterr) {
-                            if (iterr->first == eve.key.keysym.sym) {
-                                std::cout << "Hittade newgame func" << std::endl;
-                                n = iterr->second;
-                                n();
-                            }
+                        if(functions.count(a)>0) {
+                            mfunk m = functions[a];
+                            (this->*m)();
                         }
-                        
-                        std::map<char, mfunk>::iterator iter;
-                        mfunk m = nullptr;
-                        
-                        for (iter = functions.begin(); iter != functions.end(); ++iter) {
-                            if (iter->first == eve.key.keysym.sym) {
-                                std::cout << "Det stämde!" << std::endl;
-                                m = iter->second;
-                                (this->*m)();
-                            }
+                        else if(nfuncs.count(a)>0) {
+                            std::function<void()> nfunk = nfuncs[a];
+                            nfunk();
                         }
-                        
-                        
-                        /*
-                        std::map<char, mfunk>::iterator result = functions.find('c');
-                        if(result != functions.end()) {
-                            auto mem = result->second;
-                            (this->*mem)();
-                        }*/
-                        
-                        //func();
-                        //if(eve.key.keysym.sym == SDLK_BACKSPACE
-                        
-                        
+   
                 } // switch
             } // inner-while
             
@@ -229,8 +189,6 @@ namespace game {
         int x = 0;
         int ballY = 1, ballX = 0;
         int varv = 0;
-        
-        
 
         for (Sprite* s : sprites)
             s->draw();
@@ -257,6 +215,13 @@ namespace game {
                         if(!ball->released) {
                             ball->released = true;
                             ball->goingUp = true;
+                        }
+                    case SDL_KEYDOWN:
+                        char a = eve.key.keysym.sym;
+                        
+                        if(nfuncs.count(a)>0) {
+                            std::function<void()> nfunk = nfuncs[a];
+                            nfunk();
                         }
                 } // switch
             } // inre while
@@ -474,6 +439,13 @@ namespace game {
                             goOn = false;
                             break;
                         }
+                    case SDL_KEYDOWN:
+                        char a = eve.key.keysym.sym;
+                        
+                        if(nfuncs.count(a)>0) {
+                            std::function<void()> nfunk = nfuncs[a];
+                            nfunk();
+                        }
                     
                         
                 } // switch
@@ -628,9 +600,7 @@ namespace game {
     }
 
     GameEngine::~GameEngine() {
-        
-        
-        if(newGameInitialized) {
+      if(newGameInitialized) {
             std::for_each(sprites.begin(), sprites.end(), [](Sprite* sprite) {
                 if(sprite != nullptr)
                     delete sprite;

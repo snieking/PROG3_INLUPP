@@ -22,6 +22,7 @@ using namespace std;
 using namespace game;
 
 int points = 0;
+GameEngine* ge;
 
 int level = 4;
 bool freshGame(GameEngine* ge) {
@@ -95,13 +96,25 @@ bool freshGame(GameEngine* ge) {
 
 }
 
+void quit() {
+    if(ge != NULL)
+        delete ge;
+    exit(0);
+}
+
 void newGame() {
     try {
-        GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
+        ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
         mfunk hs = &GameEngine::highScore;
-        ge->addShortcut('h', hs);
+        
+        
+        // Function pointers
+        ge->addNShortcut('q', &quit);
+        ge->addNShortcut('n', &newGame);
         //ge->addNewGameShortcut('a', newGame);
         
+        // Member function pointers
+        ge->addShortcut('h', hs);
         mfunk minus = &GameEngine::minusDifficulty;
         ge->addShortcut('1', minus);
         
@@ -147,6 +160,7 @@ void newGame() {
             
         }
         
+
         delete ge;
         
     } catch (runtime_error& e) {
