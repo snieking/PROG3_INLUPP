@@ -23,9 +23,11 @@ using namespace game;
 
 int points = 0;
 
+int level = 4;
 bool freshGame(GameEngine* ge) {
     
-    int level = 4;
+    if(level != 7)
+        level++;
     int yVal = 50, xVal = 0;
     
     /* Random since c++11 */
@@ -87,17 +89,24 @@ bool freshGame(GameEngine* ge) {
     }
     else {
         points = 0;
+        level = 4;
         return false;
     }
 
 }
 
-
-
-int main(int argc, const char * argv[]) {
+void newGame() {
     try {
         GameEngine* ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
-        ge->addHighScoreShortcut('1');
+        mfunk hs = &GameEngine::highScore;
+        ge->addShortcut('h', hs);
+        //ge->addNewGameShortcut('a', newGame);
+        
+        mfunk minus = &GameEngine::minusDifficulty;
+        ge->addShortcut('1', minus);
+        
+        mfunk plus = &GameEngine::plusDifficulty;
+        ge->addShortcut('2', plus);
         
         
         
@@ -133,7 +142,7 @@ int main(int argc, const char * argv[]) {
                 *spos = nullptr;
                 
             }
-
+            
             ge->getBrickField()->getBricks().clear();
             
         }
@@ -143,5 +152,12 @@ int main(int argc, const char * argv[]) {
     } catch (runtime_error& e) {
         cerr << e.what() << endl;
     }
+    
+}
+
+
+
+int main(int argc, const char * argv[]) {
+    newGame();
     return 0;
 }

@@ -27,7 +27,7 @@ namespace game {
     void GoldBrick::draw() {
         if(durability == 2 && hit == true) {
             SDL_DestroyTexture(ture);
-            SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/goldbrick_2.png");
+            SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/goldbrick_1.png");
             if(surf == NULL)
                 std::cout << "Unable to load Purple cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
@@ -36,7 +36,7 @@ namespace game {
         }
         else if(durability == 1 && hit == true) {
             SDL_DestroyTexture(ture);
-            SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/goldbrick_1.png");
+            SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/goldbrick_2.png");
             if(surf == NULL)
                 std::cout << "Unable to load Purple cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);

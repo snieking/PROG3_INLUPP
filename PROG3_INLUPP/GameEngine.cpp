@@ -26,6 +26,11 @@ namespace game {
         textColor = {255, 255, 255};
     }
     
+    void GameEngine::plusDifficulty() {
+        if(timePerFrame != 0)
+            timePerFrame--;
+    }
+    
     void GameEngine::add(Sprite *sprite) {
         sprites.push_back(sprite);
     }
@@ -35,7 +40,7 @@ namespace game {
         sprites.erase(pos);
     }
     
-    void GameEngine::addHighScoreShortcut(char c) {
+    void GameEngine::addShortcut(char c, mfunk f) {
         //functions.insert(std::pair<char, bool(*)>(c, function));
         //typedef void (*pfunc)();
         //void (GameEngine::*mfunk) ();
@@ -44,13 +49,17 @@ namespace game {
         //functionVector.push_back(function);
         
         
-        mfunk mpf = &GameEngine::highScore;
         
-        functions.insert({c, mpf});
+        functions.insert({c, f});
         
         //mfunk npf = &GameEngine::newGame;
         
         //(ge->*mpf)();
+    }
+    
+    void GameEngine::addNewGameShortcut(char c, ScriptFunction npf) {
+        funcs.insert({c, npf});
+        
     }
     
     void GameEngine::setPaddle(PlayerSprite *thePaddle) {
@@ -74,6 +83,7 @@ namespace game {
         
         int newGameX = (WIDTH/2)-100, newGameY = (HEIGHT/2)-75, newGameW = 250, newGameH = 75;
         int highscoreX = (WIDTH/2)-100, highscoreY = newGameY+newGameH+10, highscoreW = newGameW, highscoreH = newGameH;
+        int plusMinusX = 455, plusMinusY = 400, plusMinusW = 20, plusMinusH = 60;
         
         // New game button
         SDL_Surface* newGameSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/playGame.png");
@@ -91,6 +101,18 @@ namespace game {
         highscoreTexture = SDL_CreateTextureFromSurface(ren, highscoreSurf);
         SDL_FreeSurface(highscoreSurf);
         SDL_Rect highscoreRect = { highscoreX, highscoreY, highscoreW, highscoreH };
+        
+        // PlusMinus Button
+        SDL_Surface* plusMinusSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/plusminus.png");
+        if(plusMinusSurf == NULL)
+            std::cout << "Unable to load plusMinus image" << std::endl;
+        
+        plusMinusText = SDL_CreateTextureFromSurface(ren, plusMinusSurf);
+        SDL_FreeSurface(plusMinusSurf);
+        SDL_Rect plusMinusRect = { plusMinusX, plusMinusY, plusMinusW, plusMinusH };
+        
+        // Difficulty rect
+        SDL_Rect difficultyRect = { 345, 400, 100, 60 };
         
         // Created by text
         std::string createdBy = "Viktor Plane and Olof Hofstedt (PROG3 2015-16)";
@@ -116,10 +138,26 @@ namespace game {
                             highScore();
                             break;
                         }
+                        if (eve.button.x >= plusMinusX && eve.button.x <= plusMinusX+plusMinusW) {
+                            if(eve.button.y >= plusMinusY && eve.button.y <= plusMinusY+(plusMinusH/2))
+                                minusDifficulty();
+                            else if(eve.button.y >= plusMinusY+(plusMinusH/2) && eve.button.y <= plusMinusY+plusMinusH)
+                                plusDifficulty();
+                        }
                     case SDL_KEYDOWN:
                         //char a = eve.key.keysym.sym;
                         //mfunk f = functions[a];
                         //*f;
+                        std::map<char, ScriptFunction>::iterator iterr;
+                        ScriptFunction n = nullptr;
+                        
+                        for (iterr = funcs.begin(); iterr != funcs.end(); ++iterr) {
+                            if (iterr->first == eve.key.keysym.sym) {
+                                std::cout << "Hittade newgame func" << std::endl;
+                                n = iterr->second;
+                                n();
+                            }
+                        }
                         
                         std::map<char, mfunk>::iterator iter;
                         mfunk m = nullptr;
@@ -148,10 +186,22 @@ namespace game {
             } // inner-while
             
             SDL_RenderClear(ren);
+            
+            // Difficulty text
+            std::string difficulty = "Handicap: " + getDifficulty();
+            SDL_Surface* difficultySurf = TTF_RenderText_Solid(f, difficulty.c_str(), textColor);
+            difficultyText = SDL_CreateTextureFromSurface(ren, difficultySurf);
+            SDL_FreeSurface(difficultySurf);
+            
             SDL_RenderCopy(ren, newGameTexture, NULL, &newGameRect);
             SDL_RenderCopy(ren, highscoreTexture, NULL, &highscoreRect);
+            SDL_RenderCopy(ren, plusMinusText, NULL, &plusMinusRect);
+            SDL_RenderCopy(ren, difficultyText, NULL, &difficultyRect);
             SDL_RenderCopy(ren, createdByText, NULL, &createdByRect);
             SDL_RenderPresent(ren);
+            
+            // Destroy texture
+            SDL_DestroyTexture(difficultyText);
         } // outer-while
         return false;
     } // mainMenu

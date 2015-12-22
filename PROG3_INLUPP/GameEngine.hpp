@@ -14,6 +14,7 @@
 
 namespace game {
 typedef void (GameEngine::*mfunk)();
+typedef void (*ScriptFunction)(void);
 class Sprite;
 
 class GameEngine {
@@ -22,8 +23,12 @@ public:
     void add(Sprite* sprite);
     void remove(Sprite* sprite);
     std::list<Sprite*>& getSprites() { return sprites; }
-    void addHighScoreShortcut(char c);
+    void addShortcut(char c, mfunk f);
+    void addNewGameShortcut(char c, ScriptFunction);
     SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
+    std::string getDifficulty() { return std::to_string(timePerFrame); }
+    void plusDifficulty();
+    void minusDifficulty() { timePerFrame++; }
     bool run();
     bool mainMenu();
     bool newGame();
@@ -40,12 +45,12 @@ private:
     SDL_Window* win;
     SDL_Renderer* ren;
     std::list<Sprite*> sprites;
-    
     std::map<char, mfunk> functions;
+    std::map<char, ScriptFunction> funcs;
     PlayerSprite* paddle;
     Ball* ball;
     BrickField* brickField;
-    const int timePerFrame = 0;
+    int timePerFrame = 3;
     int WIDTH, HEIGHT;
     SDL_Color textColor;
     TTF_Font* f;
@@ -57,6 +62,8 @@ private:
     SDL_Texture* highscoreTexture;
     
     /* main Menu */
+    SDL_Texture* plusMinusText;
+    SDL_Texture* difficultyText;
     
     /* high Score */
     std::multimap<int, std::string, std::greater<int>> scores;
