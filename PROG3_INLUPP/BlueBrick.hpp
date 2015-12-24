@@ -2,10 +2,6 @@
 #define Brick_hpp
 
 #include "BrickSprite.hpp"
-#include "Ball.hpp"
-#include <SDL2/SDL.h>
-
-/* Fixa så att brickor tas bort ifall träffade */
 
 namespace game {
     class BlueBrick : public BrickSprite {

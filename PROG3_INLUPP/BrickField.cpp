@@ -1,7 +1,6 @@
 #include "BrickField.hpp"
+
 #include <vector>
-#include <algorithm>
-#include <iostream>
 
 namespace game {
     

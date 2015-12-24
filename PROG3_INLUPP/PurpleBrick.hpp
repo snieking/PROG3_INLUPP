@@ -1,15 +1,6 @@
-//
-//  PurpleBrick.hpp
-//  PROG3_INLUPP
-//
-//  Created by Viktor Plane on 19/12/15.
-//  Copyright © 2015 Viktor Plane. All rights reserved.
-//
-
 #ifndef PurpleBrick_hpp
 #define PurpleBrick_hpp
 
-#include <stdio.h>
 #include "BrickSprite.hpp"
 
 namespace game {

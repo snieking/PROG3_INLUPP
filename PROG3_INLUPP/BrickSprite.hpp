@@ -1,7 +1,6 @@
 #ifndef BrickSprite_hpp
 #define BrickSprite_hpp
 
-#include <stdio.h>
 #include "Sprite.hpp"
 #include "Ball.hpp"
 

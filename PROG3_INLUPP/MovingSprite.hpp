@@ -1,7 +1,6 @@
 #ifndef MovingSprite_hpp
 #define MovingSprite_hpp
 
-#include <stdio.h>
 #include "Sprite.hpp"
 
 namespace game {

@@ -78,6 +78,7 @@ private:
     SDL_Rect varvRect;
     SDL_Texture* rubrText;
     SDL_Rect rubrRect;
+    bool brickRemoved;
     
     /* Game Over */
     bool gameOverInitialized = false;

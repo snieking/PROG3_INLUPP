@@ -3,6 +3,7 @@
 
 #include "Sprite.hpp"
 #include "BrickSprite.hpp"
+
 #include <vector>
 
 namespace game {

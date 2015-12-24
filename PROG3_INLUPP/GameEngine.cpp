@@ -9,7 +9,6 @@
 #include <SDL2_ttf/SDL_ttf.h>
 
 #include <iostream>
-#include <ctime>
 
 namespace game {
 
@@ -71,7 +70,7 @@ namespace game {
         int highscoreX = (WIDTH/2)-100, highscoreY = newGameY+newGameH+10, highscoreW = newGameW, highscoreH = newGameH;
         int plusMinusX = 455, plusMinusY = 400, plusMinusW = 20, plusMinusH = 60;
         
-        // New game button
+        // new game button
         SDL_Surface* newGameSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/playGame.png");
         if(newGameSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
@@ -79,7 +78,7 @@ namespace game {
         SDL_FreeSurface(newGameSurf);
         SDL_Rect newGameRect = { newGameX, newGameY, newGameW, newGameH };
         
-        // Highscore button
+        // highscore button
         SDL_Surface* highscoreSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/scores.png");
         if(highscoreSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
@@ -88,7 +87,7 @@ namespace game {
         SDL_FreeSurface(highscoreSurf);
         SDL_Rect highscoreRect = { highscoreX, highscoreY, highscoreW, highscoreH };
         
-        // PlusMinus Button
+        // plusMinus Button
         SDL_Surface* plusMinusSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/plusminus.png");
         if(plusMinusSurf == NULL)
             std::cout << "Unable to load plusMinus image" << std::endl;
@@ -97,24 +96,23 @@ namespace game {
         SDL_FreeSurface(plusMinusSurf);
         SDL_Rect plusMinusRect = { plusMinusX, plusMinusY, plusMinusW, plusMinusH };
         
-        // Difficulty rect
+        // difficulty rect
         SDL_Rect difficultyRect = { 345, 400, 100, 60 };
         
-        // Created by text
+        // created by text
         std::string createdBy = "Viktor Plane and Olof Hofstedt (PROG3 2015-16)";
         SDL_Surface* createdBySurf = TTF_RenderText_Solid(f, createdBy.c_str(), textColor);
         createdByText = SDL_CreateTextureFromSurface(ren, createdBySurf);
         SDL_FreeSurface(createdBySurf);
         createdByRect = { WIDTH - (WIDTH/2)-10, HEIGHT-25, WIDTH/2, 20 };
         
-        // Background text
+        // background text
         if(backgroundPath.length() != 0) {
             SDL_Surface* backgroundSurf = IMG_Load(backgroundPath.c_str());
             backgroundTexture = SDL_CreateTextureFromSurface(ren, backgroundSurf);
             SDL_FreeSurface(backgroundSurf);
         }
         
-        // goOn
         bool goOn = true;
         while(goOn) {
             SDL_Event eve;
@@ -124,7 +122,7 @@ namespace game {
                         goOn = false; break;
                     case SDL_MOUSEBUTTONDOWN:
                         if (eve.button.x >= newGameX && eve.button.x <= newGameX+newGameW && eve.button.y >= newGameY && eve.button.y <= newGameY+newGameH) {
-                            return true; // Can be changed to call newGame function instead
+                            return true; // can be changed to call newGame function instead
                             break;
                         }
                         if (eve.button.x >= highscoreX && eve.button.x <= highscoreX+highscoreW && eve.button.y >= highscoreY && eve.button.y <= highscoreY+highscoreH) {
@@ -150,15 +148,15 @@ namespace game {
                         }
    
                 } // switch
-            } // inner-while
+            } // inner while
             
             SDL_RenderClear(ren);
             
-            //Background image
+            // background image
             if(backgroundTexture != nullptr)
                 SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
             
-            // Difficulty text
+            // difficulty text
             std::string difficulty = "Handicap: " + getDifficulty();
             SDL_Surface* difficultySurf = TTF_RenderText_Solid(f, difficulty.c_str(), textColor);
             difficultyText = SDL_CreateTextureFromSurface(ren, difficultySurf);
@@ -172,16 +170,16 @@ namespace game {
 
             SDL_RenderPresent(ren);
             
-            // Destroy texture
+            // destroy texture
             SDL_DestroyTexture(difficultyText);
-        } // outer-while
+        } // outer while
         return false;
-    } // mainMenu
+    } // main menu
     
   
     
     bool GameEngine::newGame() {
-        // Removes mouse
+        // removes mouse
         SDL_SetRelativeMouseMode(SDL_TRUE);
         
         newGameInitialized = true;
@@ -224,9 +222,9 @@ namespace game {
                             nfunk();
                         }
                 } // switch
-            } // inre while
+            } // inner while
             
-            // FPS Counter
+            // fps counter
             if (varv % 10 == 0) {
                 double elapsedSeconds = elapsedMS / 1000.0;
                 double averageFps = varv / elapsedSeconds;
@@ -246,30 +244,15 @@ namespace game {
             
             varv++;
             
-            // Ifall bollen träffar taket så går den inte upp längre
+            // ifall bollen träffar taket så går den inte upp längre
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
+            brickRemoved = false;
+            
             for(BrickSprite* brick: brickField->getBricks()) {
+                if(!brickRemoved)
                     if(brick->intersectsWith(ball)) {
-                        //brick->hit = true;
-                        
-                        //std::cout << "Tog just bort en" << std::endl;
-                        if((brick->getX() + brick->getWidth() == ball->getX())) {
-                            //std::cout << "Högerkanten" << std::endl;
-                            ball->goingLeft = false;
-                        }
-                        else if(brick->getX() == ball->getX() + ball->getWidth()) {
-                            ball->goingLeft = true;
-                            //std::cout << "Vänsterkanten" << std::endl;
-                        }
-                        else if(brick->getY() + brick->getHeight() == ball->getY()) {
-                            ball->goingUp = false;
-                        }
-                        else if((brick->getY() == ball->getY() + ball->getHeight())) {
-                            ball->goingUp = true;
-                            //std::cout << "Överkanten" << std::endl;
-                        }
                         brick->minusDurability();
                         brick->setHit();
                         if(brick->getDurability() < 1) {
@@ -277,16 +260,17 @@ namespace game {
                             brickField->remove(brick);
                             remove(brick);
                         }
+                        brickRemoved = true;
                     }
             }
             
-            // Kolla ifall bollen har träffat en vägg
+            // kolla ifall bollen har träffat en vägg
             if(ball->getX() <= 0)
                 ball->goingLeft = false;
             if(ball->getX()+ball->getWidth() >= 800)
                 ball->goingLeft = true;
             
-            // Bollen ändras till goingUp efter att den 'studsat' på paddeln
+            // bollen ändras till goingUp efter att den 'studsat' på paddeln
             if(ball->getY() > paddle->getY()-ball->getHeight() && paddle->getY()+ball->getHeight() > ball->getY()) {
                 if(paddle->getX()-ball->getWidth() <= ball->getX() && ball->getX() < paddle->getX()+paddle->getWidth()+ball->getWidth()) {
                     ball->goingUp = true;
@@ -317,12 +301,12 @@ namespace game {
                 }
             }
             
-            // Görs endast efter bollen har skjutits iväg
+            // görs endast efter bollen har skjutits iväg
             if(ball->released) {
                 ball->move(ballX, ballY);
             }
             
-            // Kollar om man vunnit
+            // kollar om man vunnit
             int bricksLeft = 0;
             for(BrickSprite* brick : brickField->getBricks()) {
                 bricksLeft++;
@@ -331,14 +315,14 @@ namespace game {
                 return true;
             }
             
-            // Kollar om man förlorat
+            // kollar om man förlorat
             if(ball->getY()-ball->getHeight() > HEIGHT) {
                 return false;
             }
             
             SDL_RenderClear(ren);
             
-            //Background image
+            // background image
             if(backgroundTexture != nullptr)
                 SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
             
@@ -363,7 +347,7 @@ namespace game {
             if(!SDL_TICKS_PASSED(SDL_GetTicks(), start))
                 SDL_Delay(start - SDL_GetTicks());
             
-        } // yttre while
+        } // outer while
         return false;
     } // newGame
     
@@ -425,8 +409,7 @@ namespace game {
         SDL_FreeSurface(menuSurf);
         SDL_Rect menuRect = { menuX, menuY, menuW, menuH };
         
-        
-        // goOn
+
         bool goOn = true;
         while(goOn) {
             SDL_Event eve;
@@ -446,14 +429,12 @@ namespace game {
                             std::function<void()> nfunk = nfuncs[a];
                             nfunk();
                         }
-                    
-                        
                 } // switch
-            } // inner-while
+            } // inner while
             
             SDL_RenderClear(ren);
             
-            //Background image
+            // background image
             if(backgroundTexture != nullptr)
                 SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
             
@@ -468,7 +449,7 @@ namespace game {
             
             
             
-        } // outer-while
+        } // outer while
         
         
         
@@ -491,7 +472,7 @@ namespace game {
         int mainMenuW = 250, mainMenuH = 75, mainMenuX = WIDTH/2-(mainMenuW/2), mainMenuY = (HEIGHT/2)+150;
         bool scoreSubmited = false;
         
-        // Points texture
+        // points texture
         std::string printpoints = "Congratulations, you got " + std::to_string(totalPoints) + " points!";
         SDL_Surface* scoreSurf = TTF_RenderText_Solid(f, printpoints.c_str(), textColor);
         SDL_Texture* scoreTexture = SDL_CreateTextureFromSurface(ren, scoreSurf);
@@ -510,7 +491,7 @@ namespace game {
         SDL_Rect submitRect = { submitX, submitY, submitW, submitH };
         
         
-        // Main menu button
+        // main menu button
         SDL_Surface* mainMenuSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/menu.png");
         if(mainMenuSurf == NULL)
             std::cout << "Unable to load main menu image" << std::endl;
@@ -522,7 +503,7 @@ namespace game {
         std::string text = "";
         SDL_StartTextInput();
         
-        // goOn
+        
         bool backToMainMenu = false;
         bool goOn = true;
         while(goOn) {
@@ -553,7 +534,7 @@ namespace game {
                         break;
 
                 } // switch
-            } // inner-while
+            } // inner while
             
             SDL_Surface* nameInputSurf = TTF_RenderText_Solid(f, text.c_str(), textColor);
             SDL_Texture* nameInputTexture = SDL_CreateTextureFromSurface(ren, nameInputSurf);
@@ -562,7 +543,7 @@ namespace game {
             
             SDL_RenderClear(ren);
             
-            //Background image
+            // background image
             if(backgroundTexture != nullptr)
                 SDL_RenderCopy(ren, backgroundTexture, NULL, NULL);
             
@@ -576,7 +557,7 @@ namespace game {
             
 
             
-        } // outer-while
+        } // outer while
         
         SDL_StopTextInput();
         SDL_DestroyTexture(submitTexture);
@@ -592,7 +573,7 @@ namespace game {
             return true;
         else
             return false;
-    } // run
+    }
     
 
     SDL_Renderer* GameEngine::getRen() const {
@@ -600,11 +581,13 @@ namespace game {
     }
 
     GameEngine::~GameEngine() {
-      if(newGameInitialized) {
+        // if a newGame has been started
+        if(newGameInitialized) {
             std::for_each(sprites.begin(), sprites.end(), [](Sprite* sprite) {
                 if(sprite != nullptr)
                     delete sprite;
-            });
+        });
+            
             delete brickField;
             
             if (varvText != nullptr)
@@ -616,6 +599,7 @@ namespace game {
         
         delete f;
         
+        // if gameOver screen has been showned
         if(gameOverInitialized) {
             SDL_DestroyTexture(rubrText);
         }

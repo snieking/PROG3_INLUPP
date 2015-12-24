@@ -1,7 +1,6 @@
 #ifndef PlayerSprite_hpp
 #define PlayerSprite_hpp
 
-#include <SDL2/SDL.h>
 #include "Sprite.hpp"
 #include "MovingSprite.hpp"
 
