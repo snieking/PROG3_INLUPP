@@ -25,8 +25,8 @@ public:
     std::list<Sprite*>& getSprites() { return sprites; }
     void addShortcut(char c, mfunk f);
     void addNShortcut(char c, std::function<void()> nf);
-    SDL_Renderer* getRen() const; // borde vara privat egentligen(?)
-    std::string getDifficulty() { return std::to_string(timePerFrame); }
+    SDL_Renderer* getRen() const;
+    std::string getDifficulty() const { return std::to_string(timePerFrame); }
     void setBackgroundPath(std::string s) { backgroundPath = s; }
     void plusDifficulty();
     void minusDifficulty() { timePerFrame++; }
@@ -39,7 +39,7 @@ public:
     void setBall(Ball* theBall);
     void setBrickField(BrickField* theBrickField);
     BrickField* getBrickField();
-    int totalPoints = 0;
+    int totalPoints = 0; // Okej att ha publik? Känns onödigt att göra set och get för den...
     ~GameEngine();
 private:
     friend class Sprite;

@@ -14,7 +14,7 @@ namespace game {
         void remove(BrickSprite* brick);
         void clearAll();
         BrickField(int rows);
-        int getBrickRows() { return brickRows; }
+        int getBrickRows() const { return brickRows; }
         ~BrickField();
     private:
         int brickRows;

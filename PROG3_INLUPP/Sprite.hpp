@@ -13,8 +13,8 @@ namespace game {
         int getX() const { return rect.x; }
         void setX(int newX);
         int getY() const { return rect.y; }
-        int getWidth() { return rect.w; }
-        int getHeight() { return rect.h; }
+        int getWidth() const { return rect.w; }
+        int getHeight() const { return rect.h; }
         virtual ~Sprite();
     protected:
         Sprite(GameEngine* ge, int x, int y, int w, int h);

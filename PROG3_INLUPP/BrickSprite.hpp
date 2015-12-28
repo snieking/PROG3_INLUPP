@@ -9,8 +9,8 @@ namespace game {
     class BrickSprite : public Sprite {
     public:
         virtual void draw() = 0;
-        int getPoints() { return points; }
-        virtual int getDurability() = 0;
+        int getPoints() const { return points; }
+        virtual int getDurability() const = 0;
         virtual void minusDurability() = 0;
         virtual void setHit() = 0;
         bool intersectsWith(Ball* ball);
