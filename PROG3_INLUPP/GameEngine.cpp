@@ -21,6 +21,7 @@ namespace game {
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
  
         TTF_Init();
+        // Need to edit depending on OS...
         f = TTF_OpenFont("/Library/Fonts/Arial Black.ttf", 100);
         textColor = {255, 255, 255};
     }
@@ -71,7 +72,7 @@ namespace game {
         int plusMinusX = 455, plusMinusY = 400, plusMinusW = 20, plusMinusH = 60;
         
         // new game button
-        SDL_Surface* newGameSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/playGame.png");
+        SDL_Surface* newGameSurf = IMG_Load("playGame.png");
         if(newGameSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
         newGameTexture = SDL_CreateTextureFromSurface(ren, newGameSurf);
@@ -79,7 +80,7 @@ namespace game {
         SDL_Rect newGameRect = { newGameX, newGameY, newGameW, newGameH };
         
         // highscore button
-        SDL_Surface* highscoreSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/scores.png");
+        SDL_Surface* highscoreSurf = IMG_Load("scores.png");
         if(highscoreSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
         
@@ -88,7 +89,7 @@ namespace game {
         SDL_Rect highscoreRect = { highscoreX, highscoreY, highscoreW, highscoreH };
         
         // plusMinus Button
-        SDL_Surface* plusMinusSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/plusminus.png");
+        SDL_Surface* plusMinusSurf = IMG_Load("plusminus.png");
         if(plusMinusSurf == NULL)
             std::cout << "Unable to load plusMinus image" << std::endl;
         
@@ -404,7 +405,7 @@ namespace game {
         SDL_FreeSurface(fifthSurf);
         SDL_Rect fifthRect = { (WIDTH/2)-100, 360, 200, 50 };
         
-        SDL_Surface* menuSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/menu.png");
+        SDL_Surface* menuSurf = IMG_Load("menu.png");
         SDL_Texture* menuTexture = SDL_CreateTextureFromSurface(ren, menuSurf);
         SDL_FreeSurface(menuSurf);
         SDL_Rect menuRect = { menuX, menuY, menuW, menuH };
@@ -485,14 +486,14 @@ namespace game {
         SDL_FreeSurface(enterNameSurf);
         SDL_Rect enterNameRect = { 100, 300, 100, 50 };
         
-        SDL_Surface* submitSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/submit.png");
+        SDL_Surface* submitSurf = IMG_Load("submit.png");
         SDL_Texture* submitTexture = SDL_CreateTextureFromSurface(ren, submitSurf);
         SDL_FreeSurface(submitSurf);
         SDL_Rect submitRect = { submitX, submitY, submitW, submitH };
         
         
         // main menu button
-        SDL_Surface* mainMenuSurf = IMG_Load("/Users/viktorplane/Dropbox/game/new/menu.png");
+        SDL_Surface* mainMenuSurf = IMG_Load("menu.png");
         if(mainMenuSurf == NULL)
             std::cout << "Unable to load main menu image" << std::endl;
         SDL_Texture* mainMenuTexture = SDL_CreateTextureFromSurface(ren, mainMenuSurf);
@@ -586,7 +587,7 @@ namespace game {
             std::for_each(sprites.begin(), sprites.end(), [](Sprite* sprite) {
                 if(sprite != nullptr)
                     delete sprite;
-        });
+            });
             
             delete brickField;
             

@@ -13,7 +13,7 @@ namespace game {
     
     PurpleBrick::PurpleBrick(GameEngine* ge, int x, int y, int w, int h, int points) : BrickSprite(ge, x, y, w, h, points) {
         
-        SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/purplebrick_full.png");
+        SDL_Surface* surf = IMG_Load("purple.jpg");
         
         if(surf == NULL)
             std::cout << "Unable to load Brick image" << std::endl;
@@ -26,7 +26,7 @@ namespace game {
     void PurpleBrick::draw() {
         if(durability == 1 && hit == true) {
             SDL_DestroyTexture(ture);
-            SDL_Surface* surf = IMG_Load("/Users/viktorplane/Dropbox/game/new/purplebrick_1.png");
+            SDL_Surface* surf = IMG_Load("purple1.jpg");
             if(surf == NULL)
                 std::cout << "Unable to load Purple cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);

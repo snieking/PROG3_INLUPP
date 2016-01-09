@@ -121,7 +121,7 @@ void newGame() {
         mfunk plus = &GameEngine::plusDifficulty;
         ge->addShortcut('2', plus);
         
-        ge->setBackgroundPath("/Users/viktorplane/Documents/Pictures/deepspace.png");
+        ge->setBackgroundPath("deepspace.png");
         
         //ge->addFunction('1', mfunk);
         
