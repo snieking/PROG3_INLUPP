@@ -31,5 +31,4 @@ namespace game {
              return false;
      }
 
-    BrickSprite::~BrickSprite() {}
 }

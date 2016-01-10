@@ -105,15 +105,13 @@ void quit() {
 void newGame() {
     try {
         ge = new GameEngine("Atari Breakout", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600);
-        mfunk hs = &GameEngine::highScore;
-        
         
         // Function pointers
         ge->addNShortcut('q', &quit);
         ge->addNShortcut('n', &newGame);
-        //ge->addNewGameShortcut('a', newGame);
         
         // Member function pointers
+        mfunk hs = &GameEngine::highScore;
         ge->addShortcut('h', hs);
         mfunk minus = &GameEngine::minusDifficulty;
         ge->addShortcut('1', minus);
@@ -121,9 +119,9 @@ void newGame() {
         mfunk plus = &GameEngine::plusDifficulty;
         ge->addShortcut('2', plus);
         
-        ge->setBackgroundPath("deepspace.png");
+        ge->setBackgroundPath("/resources/deepspace.png");
         
-        //ge->addFunction('1', mfunk);
+    
         
         bool gameOn = true;
         if(!(ge->mainMenu()))

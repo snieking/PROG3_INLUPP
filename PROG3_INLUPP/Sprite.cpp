@@ -10,9 +10,5 @@ namespace game {
     void Sprite::setX(int newX) {
         rect.x = newX;
     }
-
-    Sprite::~Sprite() {
-    
-    }
     
 }

@@ -15,7 +15,7 @@ namespace game {
         int getY() const { return rect.y; }
         int getWidth() const { return rect.w; }
         int getHeight() const { return rect.h; }
-        virtual ~Sprite();
+        virtual ~Sprite() {}
     protected:
         Sprite(GameEngine* ge, int x, int y, int w, int h);
         GameEngine* win;

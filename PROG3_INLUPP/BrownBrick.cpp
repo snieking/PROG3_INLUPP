@@ -13,7 +13,7 @@ namespace game {
     
     BrownBrick::BrownBrick(GameEngine* ge, int x, int y, int w, int h, int points) : BrickSprite(ge, x, y, w, h, points) {
         
-        SDL_Surface* surf = IMG_Load("brown.jpg");
+        SDL_Surface* surf = IMG_Load("/resources/brown.jpg");
         
         if(surf == NULL)
             std::cout << "Unable to load Brick image" << std::endl;

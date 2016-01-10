@@ -21,8 +21,8 @@ namespace game {
         SDL_SetRenderDrawColor(ren, 0, 0, 0, 0);
  
         TTF_Init();
-        // Need to edit depending on OS...
-        f = TTF_OpenFont("/Library/Fonts/Arial Black.ttf", 100);
+        
+        f = TTF_OpenFont("/resources/Arial Black.ttf", 100);
         textColor = {255, 255, 255};
     }
     
@@ -72,7 +72,7 @@ namespace game {
         int plusMinusX = 455, plusMinusY = 400, plusMinusW = 20, plusMinusH = 60;
         
         // new game button
-        SDL_Surface* newGameSurf = IMG_Load("playGame.png");
+        SDL_Surface* newGameSurf = IMG_Load("/resources/playGame.png");
         if(newGameSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
         newGameTexture = SDL_CreateTextureFromSurface(ren, newGameSurf);
@@ -80,7 +80,7 @@ namespace game {
         SDL_Rect newGameRect = { newGameX, newGameY, newGameW, newGameH };
         
         // highscore button
-        SDL_Surface* highscoreSurf = IMG_Load("scores.png");
+        SDL_Surface* highscoreSurf = IMG_Load("/resources/scores.png");
         if(highscoreSurf == NULL)
             std::cout << "Unable to load image" << std::endl;
         
@@ -89,7 +89,7 @@ namespace game {
         SDL_Rect highscoreRect = { highscoreX, highscoreY, highscoreW, highscoreH };
         
         // plusMinus Button
-        SDL_Surface* plusMinusSurf = IMG_Load("plusminus.png");
+        SDL_Surface* plusMinusSurf = IMG_Load("/resources/plusminus.png");
         if(plusMinusSurf == NULL)
             std::cout << "Unable to load plusMinus image" << std::endl;
         
@@ -123,7 +123,7 @@ namespace game {
                         goOn = false; break;
                     case SDL_MOUSEBUTTONDOWN:
                         if (eve.button.x >= newGameX && eve.button.x <= newGameX+newGameW && eve.button.y >= newGameY && eve.button.y <= newGameY+newGameH) {
-                            return true; // can be changed to call newGame function instead
+                            return true;
                             break;
                         }
                         if (eve.button.x >= highscoreX && eve.button.x <= highscoreX+highscoreW && eve.button.y >= highscoreY && eve.button.y <= highscoreY+highscoreH) {
@@ -245,7 +245,7 @@ namespace game {
             
             varv++;
             
-            // ifall bollen träffar taket så går den inte upp längre
+            // ifall bollen träffar taket så går den ner istället
             if(ball->getY() == 0)
                 ball->goingUp = false;
             
@@ -486,14 +486,14 @@ namespace game {
         SDL_FreeSurface(enterNameSurf);
         SDL_Rect enterNameRect = { 100, 300, 100, 50 };
         
-        SDL_Surface* submitSurf = IMG_Load("submit.png");
+        SDL_Surface* submitSurf = IMG_Load("/resources/submit.png");
         SDL_Texture* submitTexture = SDL_CreateTextureFromSurface(ren, submitSurf);
         SDL_FreeSurface(submitSurf);
         SDL_Rect submitRect = { submitX, submitY, submitW, submitH };
         
         
         // main menu button
-        SDL_Surface* mainMenuSurf = IMG_Load("menu.png");
+        SDL_Surface* mainMenuSurf = IMG_Load("/resources/menu.png");
         if(mainMenuSurf == NULL)
             std::cout << "Unable to load main menu image" << std::endl;
         SDL_Texture* mainMenuTexture = SDL_CreateTextureFromSurface(ren, mainMenuSurf);
@@ -600,7 +600,7 @@ namespace game {
         
         delete f;
         
-        // if gameOver screen has been showned
+        // if gameOver screen has been displayed
         if(gameOverInitialized) {
             SDL_DestroyTexture(rubrText);
         }

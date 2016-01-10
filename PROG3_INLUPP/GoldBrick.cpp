@@ -13,7 +13,7 @@ namespace game {
     
     GoldBrick::GoldBrick(GameEngine* ge, int x, int y, int w, int h, int points) : BrickSprite(ge, x, y, w, h, points) {
         
-        SDL_Surface* surf = IMG_Load("gold.jpg");
+        SDL_Surface* surf = IMG_Load("/resources/gold.jpg");
         
         if(surf == NULL)
             std::cout << "Unable to load Brick image" << std::endl;
@@ -26,7 +26,7 @@ namespace game {
     void GoldBrick::draw() {
         if(durability == 2 && hit == true) {
             SDL_DestroyTexture(ture);
-            SDL_Surface* surf = IMG_Load("gold1.jpg");
+            SDL_Surface* surf = IMG_Load("/resources/gold1.jpg");
             if(surf == NULL)
                 std::cout << "Unable to load Purple cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
@@ -35,7 +35,7 @@ namespace game {
         }
         else if(durability == 1 && hit == true) {
             SDL_DestroyTexture(ture);
-            SDL_Surface* surf = IMG_Load("gold2MB2.jpg");
+            SDL_Surface* surf = IMG_Load("/resources/gold2MB2.jpg");
             if(surf == NULL)
                 std::cout << "Unable to load Purple cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);

@@ -8,7 +8,7 @@ namespace game {
     public:
         virtual void draw() = 0;
         virtual void move(int xPos, int yPos) = 0;
-        ~MovingSprite();
+        virtual ~MovingSprite() {}
     protected:
         MovingSprite(GameEngine* ge, int x, int y, int w, int h);
     private:

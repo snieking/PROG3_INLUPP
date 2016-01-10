@@ -14,7 +14,7 @@ namespace game {
 
     BlueBrick::BlueBrick(GameEngine* ge, int x, int y, int w, int h, int points) : BrickSprite(ge, x, y, w, h, points) {
         
-        SDL_Surface* surf = IMG_Load("blue.jpg");
+        SDL_Surface* surf = IMG_Load("/resources/blue.jpg");
         
         if(surf == NULL)
             std::cout << "Unable to load Brick image" << std::endl;

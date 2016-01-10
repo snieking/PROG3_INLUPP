@@ -16,7 +16,7 @@ namespace game {
     Ball::Ball(GameEngine* ge, int x, int y, int w, int h) : MovingSprite(ge, x, y, w, h) {
 
         
-        SDL_Surface* surf = IMG_Load("ball.png");
+        SDL_Surface* surf = IMG_Load("/resources/ball.png");
         if(surf == NULL)
             std::cout << "Unable to load ball image" << std::endl;
         

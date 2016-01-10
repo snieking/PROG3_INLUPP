@@ -14,7 +14,7 @@ namespace game {
         virtual void minusDurability() = 0;
         virtual void setHit() = 0;
         bool intersectsWith(Ball* ball);
-        ~BrickSprite();
+        virtual ~BrickSprite() {};
     protected:
         BrickSprite(GameEngine* ge, int x, int y, int w, int h, int p);
     private:
