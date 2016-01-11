@@ -28,7 +28,7 @@ namespace game {
             SDL_DestroyTexture(ture);
             SDL_Surface* surf = IMG_Load("/resources/gold1.jpg");
             if(surf == NULL)
-                std::cout << "Unable to load Purple cracked image" << std::endl;
+                std::cout << "Unable to load Gold cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
             SDL_FreeSurface(surf);
             hit = false;
@@ -37,7 +37,7 @@ namespace game {
             SDL_DestroyTexture(ture);
             SDL_Surface* surf = IMG_Load("/resources/gold2MB2.jpg");
             if(surf == NULL)
-                std::cout << "Unable to load Purple cracked image" << std::endl;
+                std::cout << "Unable to load Gold cracked image" << std::endl;
             ture = SDL_CreateTextureFromSurface(win->getRen(), surf);
             SDL_FreeSurface(surf);
             hit = false;

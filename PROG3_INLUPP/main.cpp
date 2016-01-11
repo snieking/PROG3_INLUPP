@@ -119,7 +119,7 @@ void newGame() {
         mfunk plus = &GameEngine::plusDifficulty;
         ge->addShortcut('2', plus);
         
-        ge->setBackgroundPath("/resources/deepspace.png");
+        ge->setBackgroundPath("/Users/viktorplane/Desktop/resources/deepspace.png");
         
     
         
@@ -138,23 +138,16 @@ void newGame() {
             
             ge->totalPoints = points;
             
-            if(!(freshGame(ge)))
+            if(!(freshGame(ge))) {
                 if(!ge->gameOver())
                     gameOn = false;
                 else {
                     if(!ge->mainMenu())
                         gameOn = false;
                 }
-            
-            for(auto cpos = brickField->getBricks().begin(); cpos != brickField->getBricks().end(); cpos++) {
-                auto spos = find(ge->getSprites().begin(), ge->getSprites().end(), *cpos);
-                ge->getSprites().erase(spos);
-                delete *spos;
-                *spos = nullptr;
-                
             }
             
-            ge->getBrickField()->getBricks().clear();
+            ge->reset();
             
         }
         

@@ -40,6 +40,7 @@ public:
     void setBrickField(BrickField* theBrickField);
     BrickField* getBrickField();
     int totalPoints = 0; // Okej att ha publik? Känns onödigt att göra set och get för den...
+    void reset();
     ~GameEngine();
 private:
     friend class Sprite;
@@ -79,6 +80,8 @@ private:
     SDL_Texture* rubrText;
     SDL_Rect rubrRect;
     bool brickRemoved;
+    bool willStartGame;
+    bool gameWon;
     
     /* Game Over */
     bool gameOverInitialized = false;
